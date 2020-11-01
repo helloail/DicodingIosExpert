@@ -48,6 +48,7 @@ struct BottomSheetView<Content: View>: View {
         self._isOpen = isOpen
         self._index = index
     }
+    
 
     var body: some View {
         GeometryReader { geometry in
