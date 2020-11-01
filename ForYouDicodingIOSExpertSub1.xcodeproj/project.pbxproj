@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		142228D0254EA2A300C34F77 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142228CF254EA2A300C34F77 /* HomeView.swift */; };
+		142228DB254EACA300C34F77 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142228DA254EACA300C34F77 /* BottomSheetView.swift */; };
+		142228DF254EB63900C34F77 /* viewindex0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142228DE254EB63900C34F77 /* viewindex0.swift */; };
+		142228E2254ECC1500C34F77 /* CustomSegmentedPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142228E1254ECC1500C34F77 /* CustomSegmentedPickerView.swift */; };
 		1473D757254E7E3A00CE3A5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1473D756254E7E3A00CE3A5A /* AppDelegate.swift */; };
 		1473D759254E7E3A00CE3A5A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1473D758254E7E3A00CE3A5A /* SceneDelegate.swift */; };
 		1473D75B254E7E3A00CE3A5A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1473D75A254E7E3A00CE3A5A /* ContentView.swift */; };
@@ -16,6 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		142228CF254EA2A300C34F77 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		142228DA254EACA300C34F77 /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
+		142228DE254EB63900C34F77 /* viewindex0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewindex0.swift; sourceTree = "<group>"; };
+		142228E1254ECC1500C34F77 /* CustomSegmentedPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedPickerView.swift; sourceTree = "<group>"; };
 		1473D753254E7E3A00CE3A5A /* ForYouDicodingIOSExpertSub1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ForYouDicodingIOSExpertSub1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1473D756254E7E3A00CE3A5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1473D758254E7E3A00CE3A5A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +45,72 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		142228C5254E9EF800C34F77 /* Modul */ = {
+			isa = PBXGroup;
+			children = (
+				142228CB254EA21B00C34F77 /* Home */,
+			);
+			path = Modul;
+			sourceTree = "<group>";
+		};
+		142228CB254EA21B00C34F77 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				142228CE254EA25100C34F77 /* Router */,
+				142228CD254EA24100C34F77 /* View */,
+				142228CC254EA23600C34F77 /* Presenter */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		142228CC254EA23600C34F77 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		142228CD254EA24100C34F77 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				142228CF254EA2A300C34F77 /* HomeView.swift */,
+				142228DE254EB63900C34F77 /* viewindex0.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		142228CE254EA25100C34F77 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		142228D7254EAC2600C34F77 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				142228D8254EAC6500C34F77 /* Utils */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		142228D8254EAC6500C34F77 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				142228D9254EAC7300C34F77 /* VIew */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		142228D9254EAC7300C34F77 /* VIew */ = {
+			isa = PBXGroup;
+			children = (
+				142228DA254EACA300C34F77 /* BottomSheetView.swift */,
+				142228E1254ECC1500C34F77 /* CustomSegmentedPickerView.swift */,
+			);
+			path = VIew;
+			sourceTree = "<group>";
+		};
 		1473D74A254E7E3A00CE3A5A = {
 			isa = PBXGroup;
 			children = (
@@ -56,12 +130,10 @@
 		1473D755254E7E3A00CE3A5A /* ForYouDicodingIOSExpertSub1 */ = {
 			isa = PBXGroup;
 			children = (
-				1473D756254E7E3A00CE3A5A /* AppDelegate.swift */,
-				1473D758254E7E3A00CE3A5A /* SceneDelegate.swift */,
-				1473D75A254E7E3A00CE3A5A /* ContentView.swift */,
-				1473D75C254E7E3C00CE3A5A /* Assets.xcassets */,
-				1473D761254E7E3C00CE3A5A /* LaunchScreen.storyboard */,
-				1473D764254E7E3C00CE3A5A /* Info.plist */,
+				142228D7254EAC2600C34F77 /* Core */,
+				142228C5254E9EF800C34F77 /* Modul */,
+				1473D772254E80FB00CE3A5A /* App */,
+				1473D76B254E7FCF00CE3A5A /* SuportingFiles */,
 				1473D75E254E7E3C00CE3A5A /* Preview Content */,
 			);
 			path = ForYouDicodingIOSExpertSub1;
@@ -73,6 +145,26 @@
 				1473D75F254E7E3C00CE3A5A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		1473D76B254E7FCF00CE3A5A /* SuportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				1473D761254E7E3C00CE3A5A /* LaunchScreen.storyboard */,
+				1473D75C254E7E3C00CE3A5A /* Assets.xcassets */,
+				1473D764254E7E3C00CE3A5A /* Info.plist */,
+			);
+			path = SuportingFiles;
+			sourceTree = "<group>";
+		};
+		1473D772254E80FB00CE3A5A /* App */ = {
+			isa = PBXGroup;
+			children = (
+				1473D758254E7E3A00CE3A5A /* SceneDelegate.swift */,
+				1473D75A254E7E3A00CE3A5A /* ContentView.swift */,
+				1473D756254E7E3A00CE3A5A /* AppDelegate.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,7 +237,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				142228E2254ECC1500C34F77 /* CustomSegmentedPickerView.swift in Sources */,
+				142228DF254EB63900C34F77 /* viewindex0.swift in Sources */,
 				1473D757254E7E3A00CE3A5A /* AppDelegate.swift in Sources */,
+				142228DB254EACA300C34F77 /* BottomSheetView.swift in Sources */,
+				142228D0254EA2A300C34F77 /* HomeView.swift in Sources */,
 				1473D759254E7E3A00CE3A5A /* SceneDelegate.swift in Sources */,
 				1473D75B254E7E3A00CE3A5A /* ContentView.swift in Sources */,
 			);
@@ -289,7 +385,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"ForYouDicodingIOSExpertSub1/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = ForYouDicodingIOSExpertSub1/Info.plist;
+				INFOPLIST_FILE = ForYouDicodingIOSExpertSub1/SuportingFIles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -309,7 +405,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"ForYouDicodingIOSExpertSub1/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = ForYouDicodingIOSExpertSub1/Info.plist;
+				INFOPLIST_FILE = ForYouDicodingIOSExpertSub1/SuportingFIles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
