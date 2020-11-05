@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RxSwift
+import Combine
 
 class HomePresenter: ObservableObject {
     
@@ -15,7 +16,7 @@ class HomePresenter: ObservableObject {
 
     private let router = HomeRouter()
     
-    @Published var places: [PlaceModel] = []
+    @Published var places = [PlaceModel]()
     @Published private(set) var state = LoadedStateHelper.idle
   
     init(homeUseCase: HomeUseCase) {
@@ -40,6 +41,6 @@ class HomePresenter: ObservableObject {
         NavigationLink(
             destination:
                 router.makeDetailView(for: place) ) { content() }
-    }
+    } 
 
 }

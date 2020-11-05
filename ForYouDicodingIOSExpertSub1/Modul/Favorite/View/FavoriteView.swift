@@ -16,9 +16,7 @@ struct FavoriteView: View {
         ZStack {
             switch presenter.state {
             
-            case .idle :
-                Text("Idle")
-            case .loading:
+            case .idle, .loading :
                 loadingIndicator
             case .error(let error):
                 Text("Error \(error.localizedDescription)")
@@ -45,12 +43,7 @@ extension FavoriteView {
     var content : some View {
         ScrollView(.vertical, showsIndicators: false) {
             ForEach( self.presenter.places, id: \.id ) { place in
-                
-                //                NavigationLink(destination: MobiView()){
-                //                    HomeRow(place: place)
-                //
-                //                }
-                //                HomeRow(place: place)
+         
                 ZStack {
                     self.presenter.linkBuilder(for: place) {
                         HomeRow(place: place)

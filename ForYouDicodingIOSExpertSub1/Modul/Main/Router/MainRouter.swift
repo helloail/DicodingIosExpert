@@ -10,8 +10,6 @@ import SwiftUI
 
 class MainRouter {
     
-    @EnvironmentObject var homePresenter: HomePresenter
-    
      func createNavigation(index: Int) -> some View {
         
         switch index {

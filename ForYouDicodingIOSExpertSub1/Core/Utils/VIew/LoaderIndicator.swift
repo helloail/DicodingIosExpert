@@ -13,7 +13,7 @@ struct LoaderIndicator: UIViewRepresentable {
     return UIActivityIndicatorView(style: .large)
   }
   
-  func updateUIView( _ uiView: UIActivityIndicatorView,context: UIViewRepresentableContext<LoaderIndicator> ) {
+  func updateUIView( _ uiView: UIActivityIndicatorView, context: UIViewRepresentableContext<LoaderIndicator> ) {
     uiView.startAnimating()
   }
 

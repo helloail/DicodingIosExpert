@@ -11,7 +11,6 @@ import RxSwift
 protocol HomeUseCase {
 
     func getPlaces() -> Observable<[PlaceModel]>
-
 }
 
 class HomeInteractor: NSObject {

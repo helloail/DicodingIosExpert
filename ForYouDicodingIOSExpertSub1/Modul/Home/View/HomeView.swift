@@ -16,16 +16,15 @@ struct HomeView: View {
         ZStack {
             
             switch presenter.state {
-            case .idle :
-                Text("Idle")
-            case .loading:
+            case .idle, .loading :
                 loadingIndicator
             case .error(let error):
                 Text("Error \(error.localizedDescription)")
             case .loaded:
-                content
+                VStack {
+                    content
+                }
             }
-            
         }.onAppear {
             if self.presenter.places.count == 0 {
                 self.presenter.getPlace()
@@ -35,31 +34,27 @@ struct HomeView: View {
 }
 
 extension HomeView {
-   
+    
     var loadingIndicator: some View {
         VStack {
-            Text("Loading...")
             LoaderIndicator()
+            Text("Loading...")
         }
     }
     
     var content : some View {
         ScrollView(.vertical, showsIndicators: false) {
             ForEach( self.presenter.places, id: \.name ) { place in
-            
-//                NavigationLink(destination: MobiView()){
-//                    HomeRow(place: place)
-//
-//                }
-//                HomeRow(place: place)
+                
                 ZStack {
                     self.presenter.linkBuilder(for: place) {
                         HomeRow(place: place)
                     }
                     .buttonStyle(PlainButtonStyle())
                 }.padding(EdgeInsets(top: 8, leading: 24, bottom: 8, trailing: 8))
-
+                
             }
+            
         }
     }
 }

@@ -9,13 +9,11 @@ import Foundation
 struct API {
 
   static let baseUrl = "https://tourism-api.dicoding.dev/"
-
 }
 
 protocol Endpoint {
 
   var url: String { get }
-
 }
 
 enum Endpoints {
@@ -29,5 +27,4 @@ enum Endpoints {
       }
     }
   }
-  
 }

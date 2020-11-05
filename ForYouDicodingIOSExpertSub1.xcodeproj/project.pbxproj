@@ -132,6 +132,7 @@
 		14031798254EF7680008259E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				141766662552DD8100E66ECC /* HomeRouter.swift */,
 				1403179C254EF7B90008259E /* FavoriteView.swift */,
 			);
 			path = View;
@@ -306,7 +307,6 @@
 		142228CE254EA25100C34F77 /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				141766662552DD8100E66ECC /* HomeRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
