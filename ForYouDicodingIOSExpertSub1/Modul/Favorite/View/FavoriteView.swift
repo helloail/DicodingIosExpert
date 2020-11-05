@@ -14,15 +14,18 @@ struct FavoriteView: View {
     
     var body: some View {
         ZStack {
-            if presenter.loadingState {
-                
+            switch presenter.state {
+            
+            case .idle :
+                Text("Idle")
+            case .loading:
                 loadingIndicator
-                
-            } else {
-                
+            case .error(let error):
+                Text("Error \(error.localizedDescription)")
+            case .loaded:
                 content
-                
             }
+            
         }.onAppear {
             if self.presenter.places.count == 0 {
                 self.presenter.getPlace()

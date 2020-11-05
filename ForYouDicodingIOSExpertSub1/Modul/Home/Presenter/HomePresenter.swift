@@ -16,23 +16,22 @@ class HomePresenter: ObservableObject {
     private let router = HomeRouter()
     
     @Published var places: [PlaceModel] = []
-    @Published var errorMessage: String = ""
-    @Published var loadingState: Bool = false
-    
+    @Published private(set) var state = LoadedStateHelper.idle
+  
     init(homeUseCase: HomeUseCase) {
       self.homeUseCase = homeUseCase
     }
     
     func getPlace() {
-      loadingState = true
+        state = .loading
         homeUseCase.getPlaces()
         .observeOn(MainScheduler.instance)
         .subscribe { result in
             self.places = result
         } onError: { error in
-          self.errorMessage = error.localizedDescription
+          self.state = .error(error)
         } onCompleted: {
-          self.loadingState = false
+            self.state = .loaded
         }.disposed(by: disposeBag)
     }
     
