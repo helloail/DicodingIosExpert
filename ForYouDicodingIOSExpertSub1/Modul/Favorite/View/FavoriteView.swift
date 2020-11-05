@@ -1,5 +1,5 @@
 //
-//  HomeView.swift
+//  FavoriteView.swift
 //  ForYouDicodingIOSExpertSub1
 //
 //  Created by Moh Zinnur Atthufail Addausi on 01/11/20.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct HomeView: View {
+struct FavoriteView: View {
     
     @ObservedObject var presenter: HomePresenter
     
@@ -31,7 +31,7 @@ struct HomeView: View {
     }
 }
 
-extension HomeView {
+extension FavoriteView {
     var loadingIndicator: some View {
         VStack {
             Text("Loading...")
@@ -41,21 +41,23 @@ extension HomeView {
     
     var content : some View {
         ScrollView(.vertical, showsIndicators: false) {
-            ForEach( self.presenter.places, id: \.name ) { place in
-            
-//                NavigationLink(destination: MobiView()){
-//                    HomeRow(place: place)
-//
-//                }
-//                HomeRow(place: place)
+            ForEach( self.presenter.places, id: \.id ) { place in
+                
+                //                NavigationLink(destination: MobiView()){
+                //                    HomeRow(place: place)
+                //
+                //                }
+                //                HomeRow(place: place)
                 ZStack {
                     self.presenter.linkBuilder(for: place) {
                         HomeRow(place: place)
                     }
                     .buttonStyle(PlainButtonStyle())
-                }.padding(EdgeInsets(top: 8, leading: 24, bottom: 8, trailing: 8))
-
+                }.padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+                
             }
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+            .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 0))
         }
     }
 }

@@ -19,6 +19,7 @@ fileprivate enum Constants {
 struct BottomSheetView<Content: View>: View {
     @Binding var isOpen: Bool
     @Binding var index: Int
+    private let router : MainRouter
 
     let maxHeight: CGFloat
     let minHeight: CGFloat
@@ -47,21 +48,15 @@ struct BottomSheetView<Content: View>: View {
         self.content = content()
         self._isOpen = isOpen
         self._index = index
+        self.router = MainRouter()
     }
     
-
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
                 self.indicator.padding()
                 self.content
-                
-                if self.index == 0{
-                    viewindex0()
-                }
-                else if self.index == 1 {
-                    viewindex1()
-                }
+                router.createNavigation(index: self.index)
                 
             }
             .frame(width: geometry.size.width, height: self.maxHeight, alignment: .top)
@@ -84,11 +79,3 @@ struct BottomSheetView<Content: View>: View {
         }
     }
 }
-
-//struct BottomSheetView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        BottomSheetView(isOpen: .constant(false), index: 1, maxHeight: 600) {
-//            Rectangle().fill(Color.red)
-//        }.edgesIgnoringSafeArea(.all)
-//    }
-//}
