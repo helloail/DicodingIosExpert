@@ -13,45 +13,52 @@ struct MainView : View {
     @State private var bottomSheetShown = true
     @State var selectedIndex  = 0
     
+    private let presenter = MainPresenter()
+    
     private let router = MainRouter()
     
     var body: some View {
         
-        ZStack(alignment: .top) {
+        ZStack(alignment: .bottom) {
+            
+            imagebackgroundMain
             VStack(spacing: 8) {
+              
                 tabview
-                imageProfileView
-                
                 Spacer()
             }
-           geometryBottomSheet
+            mainBottomSheet
         }
     }
 }
 
 extension MainView {
     
-     var tabview: some View {
+    var tabview: some View {
         
         MainTabView(selectedIndex: $selectedIndex)
-     }
-    
-    var imageProfileView: some View {
-        
-        Image("fotosaya")
-            .resizable()
-            .clipShape(Circle())
-            .frame(width: 100, height: 100)
-        
     }
     
-    var geometryBottomSheet: some View {
+    var imagebackgroundMain: some View {
+        VStack {
+            Image("mainbackground")
+                .resizable()
+                .frame(width: .infinity, height: .infinity)
+                .padding(.top, 20)
+                .background(Color("cyanbackground"))
+        }.ignoresSafeArea()
+    }
+    
+    var mainBottomSheet: some View {
         GeometryReader { geometry in
             BottomSheetView(
                 isOpen: self.$bottomSheetShown,
-                maxHeight: geometry.size.height * 0.9
+                maxHeight: geometry.size.height * 0.87,
+                minHeight: geometry.size.height * 0.37
             ) {
-                router.createNavigation(index: self.selectedIndex)
+                self.presenter.navigationBuilder(forIndex: self.selectedIndex) {
+                    
+                }
             }
         }.edgesIgnoringSafeArea(.all)
     }

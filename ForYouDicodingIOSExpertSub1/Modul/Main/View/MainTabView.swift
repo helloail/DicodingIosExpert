@@ -13,36 +13,17 @@ struct MainTabView : View {
     @Binding var selectedIndex: Int
     var titles = ["Home", "Favorites"]
     var imagetitles = ["house.fill", "heart.fill"]
-    var colors = [Color.red, Color.green]
     @State var frames = Array<CGRect>(repeating: .zero, count: 2)
     
     var body: some View {
         VStack {
             ZStack {
-                HStack(spacing: UIScreen.main.bounds.width/4) {
-                    ForEach(self.titles.indices, id: \.self) { index in
-                        Button(action: { self.selectedIndex = index }) {
-                            HStack(spacing : 8) {
-                                
-                                Image(systemName: self.imagetitles[index])
-                                
-                                Text(self.titles[index])
-                                    .font(Font.footnote)
-                                    .fontWeight(.bold)
-                            }
-                            
-                        }.buttonStyle(PlainButtonStyle())
-                        .padding(8)
-                        .background(
-                            GeometryReader { geo in
-                                Color.clear.onAppear { self.setFrame(index: index, frame: geo.frame(in: .global)) }
-                            }
-                        )
-                    }
+                HStack(spacing: UIScreen.main.bounds.width / 4) {
+                    tabbutton
                 }
                 .background(
-                    Capsule().fill(
-                        self.colors[self.selectedIndex].opacity(0.4))
+                    Capsule()
+                        .fill(Color("cyanactive"))
                         .frame(width: self.frames[self.selectedIndex].width,
                                height: self.frames[self.selectedIndex].height,
                                alignment: .topLeading)
@@ -56,5 +37,33 @@ struct MainTabView : View {
     
     func setFrame(index: Int, frame: CGRect) {
         self.frames[index] = frame
+    }
+}
+
+extension MainTabView {
+    var tabbutton  : some View {
+        ForEach(self.titles.indices, id: \.self) { index in
+            Button(action: { self.selectedIndex = index }) {
+                HStack(spacing: 8) {
+                    
+//                    Text("\(self.frames[self.selectedIndex].width)")
+                    
+                    Image(systemName: self.imagetitles[index])
+                        .foregroundColor(Color("texttab"))
+                    
+                    Text(self.titles[index])
+                        .font(Font.footnote)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color("texttab"))
+                }
+                
+            }.buttonStyle(PlainButtonStyle())
+            .padding(8)
+            .background(
+                GeometryReader { geo in
+                    Color.clear.onAppear { self.setFrame(index: index, frame: geo.frame(in: .global)) }
+                }
+            )
+        }
     }
 }

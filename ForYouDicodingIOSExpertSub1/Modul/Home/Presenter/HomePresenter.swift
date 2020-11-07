@@ -35,12 +35,15 @@ class HomePresenter: ObservableObject {
             self.state = .loaded
         }.disposed(by: disposeBag)
     }
-    
-    func linkBuilder<Content: View>(for place: PlaceModel, @ViewBuilder content: () -> Content) -> some View {
 
+    func linkBuilder<Content: View>(for place: PlaceModel, @ViewBuilder content: () -> Content) -> some View {
+        
         NavigationLink(
             destination:
-                router.makeDetailView(for: place) ) { content() }
-    } 
-
+                    router.makeDetailView(for: place)
+               
+        ) { content() }
+            
+        }
+    
 }

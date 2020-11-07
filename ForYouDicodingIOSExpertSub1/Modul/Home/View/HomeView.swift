@@ -5,12 +5,13 @@
 //  Created by Moh Zinnur Atthufail Addausi on 01/11/20.
 //
 
-import Foundation
 import SwiftUI
 
 struct HomeView: View {
     
     @ObservedObject var presenter: HomePresenter
+    
+    private let router = HomeRouter()
     
     var body: some View {
         ZStack {
@@ -45,16 +46,16 @@ extension HomeView {
     var content : some View {
         ScrollView(.vertical, showsIndicators: false) {
             ForEach( self.presenter.places, id: \.name ) { place in
-                
+        
                 ZStack {
                     self.presenter.linkBuilder(for: place) {
                         HomeRow(place: place)
                     }
                     .buttonStyle(PlainButtonStyle())
+                    
                 }.padding(EdgeInsets(top: 8, leading: 24, bottom: 8, trailing: 8))
                 
             }
-            
         }
     }
 }

@@ -9,6 +9,8 @@ import SwiftUI
 
 
 class DetailPresenter: ObservableObject {
+  
+    
     
     private let detailUseCase: DetailUseCase
 
@@ -18,4 +20,10 @@ class DetailPresenter: ObservableObject {
       self.detailUseCase = detailUseCase
         place = detailUseCase.getPlace()
     }
+    
+    
+    
+
 }
+
+
