@@ -44,6 +44,6 @@ extension TourismRepository: TourismRepositoryProtocol {
                         .flatMap { _ in self.locale.getPlaces()
                             .map{ PlaceMapper.mapPlaceEntitiesToDomains(input: $0) }
                             
-                        } )
+                        })
     }
 }

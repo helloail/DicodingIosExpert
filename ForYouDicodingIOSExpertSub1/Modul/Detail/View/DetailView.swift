@@ -21,7 +21,7 @@ struct DetailView: View {
             
             MapView(latitude: self.presenter.place.latitude ?? 0.0, longtitude: self.presenter.place.longitude ?? 0.0, title: self.presenter.place.name ?? "")
             
-            backButton
+            navigation
             Spacer()
             mainBottomSheet
         }.navigationBarHidden(true)
@@ -30,15 +30,14 @@ struct DetailView: View {
 }
 
 extension DetailView {
-    var imageMeal: some View {
-        
-        WebImage(url: URL(string: self.presenter.place.image ?? ""))
-            .resizable()
-            .indicator(.activity)
-            .transition(.fade(duration: 0.5))
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 100, height: 100)
-            .cornerRadius(20)
+    
+    var navigation : some View {
+        HStack {
+            backButton
+            Spacer()
+            favoriteButton
+        }
+        .padding(EdgeInsets(top: 48, leading: 16, bottom: 0, trailing: 16))
     }
     
     var mainBottomSheet: some View {
@@ -48,24 +47,53 @@ extension DetailView {
                 maxHeight: geometry.size.height * 0.87,
                 minHeight: geometry.size.height * 0.2
             ) {
-                imageMeal
+                content
             }
         }
     }
+    var content : some View {
+        VStack {
+            imageDetail
+            titledetail
+        }
+        .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+    }
     
     var backButton : some View {
-        HStack {
-            Button(action: {
-                
-                self.presentationMode.wrappedValue.dismiss()
-            }) {
-                Image(systemName: "chevron.left")
-                
-            }.buttonStyle(CircleBackButtonStyle())
-            .padding(EdgeInsets(top: 48, leading: 16, bottom: 0, trailing: 0))
+        
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }){
+            Image(systemName: "chevron.left")
             
-            Spacer()
-        }
+        }.buttonStyle(CircleBackButtonStyle())
+        
+    }
+    
+    var favoriteButton : some View {
+        Button(action: {
+            
+        }){
+            Image(systemName: "heart.fill")
+            
+        }.buttonStyle(CircleBackButtonStyle())
+        
+    }
+    
+    var imageDetail: some View {
+        
+        WebImage(url: URL(string: self.presenter.place.image ?? ""))
+            .resizable()
+            .indicator(.activity)
+            .transition(.fade(duration: 0.5))
+            .aspectRatio(contentMode: .fill)
+            .frame(width: .infinity, height: 200)
+            .cornerRadius(20)
+    }
+    
+    var titledetail : some View {
+        Text(self.presenter.place.placeDescription ?? "")
+            .fixedSize(horizontal: false, vertical: true)
     }
     
 }
