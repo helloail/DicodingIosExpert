@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct MainTabView : View {
+struct MainTabView: View {
     
     @Binding var selectedIndex: Int
     var titles = ["Home", "Favorites"]

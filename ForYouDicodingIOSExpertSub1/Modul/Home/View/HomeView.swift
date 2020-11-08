@@ -22,9 +22,9 @@ struct HomeView: View {
             case .error(let error):
                 Text("Error \(error.localizedDescription)")
             case .loaded:
-                VStack {
-                    content
-                }
+                
+                content
+                
             }
         }.onAppear {
             if self.presenter.places.count == 0 {

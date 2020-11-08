@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-class FavoritesEntity: Object {
+class FavoritePlacesEntity: Object {
     
     @objc dynamic var id: Int = 0
     @objc dynamic var name: String = ""

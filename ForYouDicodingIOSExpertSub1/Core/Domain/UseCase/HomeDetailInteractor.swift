@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol DetailUseCase {
+protocol DetailHomeUseCase {
 
   func getPlace() -> PlaceModel
 
 }
 
-class DetailInteractor: DetailUseCase {
+class DetailHomeInteractor: DetailHomeUseCase {
 
   private let repository: TourismRepositoryProtocol
   private let place: PlaceModel

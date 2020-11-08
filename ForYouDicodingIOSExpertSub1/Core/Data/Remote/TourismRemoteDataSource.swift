@@ -22,7 +22,7 @@ final class TourismRemoteDataSource: NSObject {
 
 }
 
-extension TourismRemoteDataSource : TourismRemoteDataSourceProtocol {
+extension TourismRemoteDataSource: TourismRemoteDataSourceProtocol {
     func getPlaces() -> Observable<[PlaceResponse]> {
         return Observable<[PlaceResponse]>.create { observer  in
             
@@ -31,7 +31,7 @@ extension TourismRemoteDataSource : TourismRemoteDataSourceProtocol {
             
             AF.request(url)
                 .validate()
-                .responseDecodable(of: TourismResponse.self){ response in
+                .responseDecodable(of: TourismResponse.self) { response in
                     switch response.result {
                     
                     case .success(let value):

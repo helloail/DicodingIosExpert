@@ -10,23 +10,45 @@ import RealmSwift
 
 final class Injection: NSObject {
     
+    let realm = try? Realm()
+    
     private func provideTourismRepository() -> TourismRepositoryProtocol {
-        let realm = try? Realm()
-        
+    
         let locale: TourismLocaleDataSource = TourismLocaleDataSource.sharedInstance(realm)
         let remote: TourismRemoteDataSource = TourismRemoteDataSource.sharedInstance
         
         return TourismRepository.sharedInstance(locale, remote)
     }
     
+    private func provideFavouritesTourismRepository() -> FavouritesTourismRepositoryProtocol {
+
+        let locale: FavouritesTourismLocaleDataSource = FavouritesTourismLocaleDataSource.sharedInstance(realm)
+        
+        return FavouritesTourismRepository.sharedInstance(locale)
+    }
+   
+}
+
+//Mark : - ViewProvider
+extension Injection {
+    
     func provideHome() -> HomeUseCase {
         let repository = provideTourismRepository()
         return HomeInteractor(repository: repository)
     }
     
-    func provideDetail(place: PlaceModel) -> DetailUseCase {
-      let repository = provideTourismRepository()
-      return DetailInteractor(repository: repository, place: place)
+    func provideFavourites() -> FavouritesUseCase {
+        let repository = provideFavouritesTourismRepository()
+        return FavouritesInteractor(repository: repository)
     }
     
+    func provideDetailHome(place: PlaceModel) -> DetailHomeUseCase {
+        let repository = provideTourismRepository()
+        return DetailHomeInteractor(repository: repository, place: place)
+    }
+    
+    func provideDetailFavourites(favourites: PlaceModel) -> DetailFavouritesUseCase {
+        let repository = provideFavouritesTourismRepository()
+        return DetailFavouritesInteractor(repository: repository, favourites: favourites)
+    }
 }

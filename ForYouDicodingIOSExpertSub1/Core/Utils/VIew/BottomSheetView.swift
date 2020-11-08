@@ -8,12 +8,11 @@
 import Foundation
 import SwiftUI
 
-fileprivate enum Constants {
+private enum Constants {
     static let radius: CGFloat = 16
     static let indicatorHeight: CGFloat = 6
     static let indicatorWidth: CGFloat = 60
     static let snapRatio: CGFloat = 0.25
-    static let minHeightRatio: CGFloat = 0.6
 }
 
 struct BottomSheetView<Content: View>: View {
@@ -40,9 +39,8 @@ struct BottomSheetView<Content: View>: View {
             }
     }
     
-    init(isOpen: Binding<Bool>, maxHeight: CGFloat, minHeight : CGFloat, @ViewBuilder content: () -> Content) {
+    init(isOpen: Binding<Bool>, maxHeight: CGFloat, minHeight: CGFloat, @ViewBuilder content: () -> Content) {
         self.minHeight = minHeight
-//            maxHeight * Constants.minHeightRatio
         self.maxHeight = maxHeight
         self.content = content()
         self._isOpen = isOpen

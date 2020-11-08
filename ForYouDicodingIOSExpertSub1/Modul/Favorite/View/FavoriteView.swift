@@ -10,7 +10,7 @@ import SwiftUI
 
 struct FavoriteView: View {
     
-    @ObservedObject var presenter: HomePresenter
+    @ObservedObject var presenter: FavouritesPresenter
     
     var body: some View {
         ZStack {

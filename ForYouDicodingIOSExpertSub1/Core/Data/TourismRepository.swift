@@ -11,7 +11,6 @@ import RxSwift
 protocol TourismRepositoryProtocol {
     
     func getPlaces() -> Observable<[PlaceModel]>
-
 }
 
 final class TourismRepository: NSObject {
@@ -36,13 +35,13 @@ extension TourismRepository: TourismRepositoryProtocol {
     func getPlaces() -> Observable<[PlaceModel]> {
         return self.locale.getPlaces()
             .map { PlaceMapper.mapPlaceEntitiesToDomains(input: $0) }
-            .filter{ !$0.isEmpty }
+            .filter { !$0.isEmpty }
             .ifEmpty(switchTo: self.remote.getPlaces()
-                        .map{ PlaceMapper.mapPlaceResponsesToEntities(input: $0 ) }
+                        .map { PlaceMapper.mapPlaceResponsesToEntities(input: $0 ) }
                         .flatMap { self.locale.addPlaces(from: $0) }
                         .filter { $0 }
                         .flatMap { _ in self.locale.getPlaces()
-                            .map{ PlaceMapper.mapPlaceEntitiesToDomains(input: $0) }
+                            .map { PlaceMapper.mapPlaceEntitiesToDomains(input: $0) }
                             
                         })
     }

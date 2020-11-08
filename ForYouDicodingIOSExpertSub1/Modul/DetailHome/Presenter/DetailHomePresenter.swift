@@ -7,23 +7,19 @@
 
 import SwiftUI
 
-
-class DetailPresenter: ObservableObject {
+class DetailHomePresenter: ObservableObject {
   
-    
-    
-    private let detailUseCase: DetailUseCase
+    private let detailUseCase: DetailHomeUseCase
 
     @Published var place: PlaceModel
 
-    init(detailUseCase: DetailUseCase) {
+    init(detailUseCase: DetailHomeUseCase) {
       self.detailUseCase = detailUseCase
         place = detailUseCase.getPlace()
     }
     
+    func addFavourites() {
+        print(place)
+    }
     
-    
-
 }
-
-

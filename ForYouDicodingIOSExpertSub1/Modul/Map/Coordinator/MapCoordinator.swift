@@ -11,8 +11,8 @@ final class Coordinator: NSObject, MKMapViewDelegate {
     var control: MapView
     let latitude: Double
     let longtitude: Double
-    let title : String
-    init(_ control: MapView, latitude : Double, longtitude : Double, title : String) {
+    let title: String
+    init(_ control: MapView, latitude: Double, longtitude: Double, title: String) {
         self.control = control
         self.latitude = latitude
         self.longtitude = longtitude

@@ -9,10 +9,9 @@ import Foundation
 import RealmSwift
 import RxSwift
 
-
 protocol TourismLocaleDataSourceProtocol: class {
     func getPlaces() -> Observable<[PlaceEntity]>
-    func addPlaces(from categories: [PlaceEntity]) -> Observable<Bool>
+    func addPlaces(from places: [PlaceEntity]) -> Observable<Bool>
 }
 
 final class TourismLocaleDataSource: NSObject {
@@ -36,7 +35,7 @@ extension TourismLocaleDataSource: TourismLocaleDataSourceProtocol {
             guard let realmstorage = self.realm else {
                 return observer.onError(DatabaseError.invalidInstance) as! Disposable }
             
-            let places : Results<PlaceEntity> = {
+            let places: Results<PlaceEntity> = {
                 realmstorage.objects(PlaceEntity.self)
                     .sorted(byKeyPath: "name", ascending: true)
             }()
@@ -48,8 +47,7 @@ extension TourismLocaleDataSource: TourismLocaleDataSourceProtocol {
         }
     }
     
-    
-    func addPlaces(from categories: [PlaceEntity]) -> Observable<Bool> {
+    func addPlaces(from places: [PlaceEntity]) -> Observable<Bool> {
         return Observable<Bool>.create { observer in
             
             guard let realmstorage = self.realm else {
@@ -57,8 +55,8 @@ extension TourismLocaleDataSource: TourismLocaleDataSourceProtocol {
 
             do {
                 try realmstorage.write {
-                    for category in categories {
-                        realmstorage.add(category, update: .all)
+                    for place in places {
+                        realmstorage.add(place, update: .all)
                     }
                     observer.onNext(true)
                     observer.onCompleted()
@@ -70,7 +68,6 @@ extension TourismLocaleDataSource: TourismLocaleDataSourceProtocol {
             return Disposables.create()
         }
     }
-        
 }
 
 extension Results {

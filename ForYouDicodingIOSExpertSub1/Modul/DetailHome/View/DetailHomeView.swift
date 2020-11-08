@@ -8,10 +8,10 @@
 import SwiftUI
 import SDWebImageSwiftUI
 
-struct DetailView: View {
+struct DetailHomeView: View {
     
     @ObservedObject private var locationManager = LocationManager() 
-    @ObservedObject var presenter: DetailPresenter
+    @ObservedObject var presenter: DetailHomePresenter
     @State private var bottomSheetShown = false
     @Environment(\.presentationMode) var presentationMode
     
@@ -29,7 +29,7 @@ struct DetailView: View {
     }
 }
 
-extension DetailView {
+extension DetailHomeView {
     
     var navigation : some View {
         HStack {
@@ -72,7 +72,7 @@ extension DetailView {
     
     var favoriteButton : some View {
         Button(action: {
-            
+            presenter.addFavourites()
         }){
             Image(systemName: "heart.fill")
             

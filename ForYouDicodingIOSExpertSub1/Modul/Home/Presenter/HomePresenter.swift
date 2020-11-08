@@ -40,7 +40,7 @@ class HomePresenter: ObservableObject {
         
         NavigationLink(
             destination:
-                    router.makeDetailView(for: place)
+                    router.makeDetailHomeView(for: place)
                
         ) { content() }
             
