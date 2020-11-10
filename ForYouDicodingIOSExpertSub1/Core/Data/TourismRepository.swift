@@ -7,10 +7,13 @@
 
 import Foundation
 import RxSwift
+import Combine
 
 protocol TourismRepositoryProtocol {
     
-    func getPlaces() -> Observable<[PlaceModel]>
+//    func getPlaces() -> Observable<[PlaceModel]>
+    
+    func getPlaces() -> AnyPublisher<[PlaceModel], Error>
 
 }
 
@@ -33,17 +36,40 @@ final class TourismRepository: NSObject {
 }
 
 extension TourismRepository: TourismRepositoryProtocol {
-    func getPlaces() -> Observable<[PlaceModel]> {
+    func getPlaces() -> AnyPublisher<[PlaceModel], Error> {
         return self.locale.getPlaces()
-            .map { PlaceMapper.mapPlaceEntitiesToDomains(input: $0) }
-            .filter{ !$0.isEmpty }
-            .ifEmpty(switchTo: self.remote.getPlaces()
-                        .map{ PlaceMapper.mapPlaceResponsesToEntities(input: $0 ) }
+            .flatMap { result -> AnyPublisher<[PlaceModel], Error> in
+                if result.isEmpty {
+                    return self.remote.getPlaces()
+                        .map { PlaceMapper.mapPlaceResponsesToEntities(input: $0) }
                         .flatMap { self.locale.addPlaces(from: $0) }
                         .filter { $0 }
                         .flatMap { _ in self.locale.getPlaces()
-                            .map{ PlaceMapper.mapPlaceEntitiesToDomains(input: $0) }
-                            
-                        })
+                            .map { PlaceMapper.mapPlaceEntitiesToDomains(input: $0) }
+                        }
+                        .eraseToAnyPublisher()
+                } else {
+                    return self.locale.getPlaces()
+                        .map { PlaceMapper.mapPlaceEntitiesToDomains(input: $0) }
+                        .eraseToAnyPublisher()
+                }
+            }.eraseToAnyPublisher()
     }
+    
+    
+    
+    
+//    func getPlaces() -> Observable<[PlaceModel]> {
+//        return self.locale.getPlaces()
+//            .map { PlaceMapper.mapPlaceEntitiesToDomains(input: $0) }
+//            .filter{ !$0.isEmpty }
+//            .ifEmpty(switchTo: self.remote.getPlaces()
+//                        .map{ PlaceMapper.mapPlaceResponsesToEntities(input: $0 ) }
+//                        .flatMap { self.locale.addPlaces(from: $0) }
+//                        .filter { $0 }
+//                        .flatMap { _ in self.locale.getPlaces()
+//                            .map{ PlaceMapper.mapPlaceEntitiesToDomains(input: $0) }
+//
+//                        })
+//    }
 }

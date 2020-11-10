@@ -18,17 +18,18 @@ struct MainView : View {
     private let router = MainRouter()
     
     var body: some View {
-        
-        ZStack(alignment: .bottom) {
-            
-            imagebackgroundMain
-            VStack(spacing: 8) {
-              
-                tabview
-                Spacer()
+      
+            ZStack(alignment: .bottom) {
+                
+                imagebackgroundMain
+                VStack(spacing: 8) {
+                    
+                    tabview
+                    Spacer()
+                }
+                mainBottomSheet
             }
-            mainBottomSheet
-        }
+         
     }
 }
 

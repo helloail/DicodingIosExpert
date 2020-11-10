@@ -6,11 +6,13 @@
 //
 
 import Foundation
-import RxSwift
+import Combine
 
 protocol HomeUseCase {
 
-    func getPlaces() -> Observable<[PlaceModel]>
+//    func getPlaces() -> Observable<[PlaceModel]>
+    
+    func getPlaces() -> AnyPublisher<[PlaceModel], Error>
 }
 
 class HomeInteractor: NSObject {
@@ -24,9 +26,13 @@ class HomeInteractor: NSObject {
 }
 
 extension HomeInteractor: HomeUseCase {
-    
-    func getPlaces() -> Observable<[PlaceModel]> {
+    func getPlaces() -> AnyPublisher<[PlaceModel], Error> {
         return repository.getPlaces()
     }
+    
+    
+//    func getPlaces() -> Observable<[PlaceModel]> {
+//        return repository.getPlaces()
+//    }
     
 }

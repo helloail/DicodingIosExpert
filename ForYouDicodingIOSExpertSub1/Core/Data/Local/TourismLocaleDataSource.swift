@@ -7,12 +7,16 @@
 
 import Foundation
 import RealmSwift
-import RxSwift
+import Combine
 
 
 protocol TourismLocaleDataSourceProtocol: class {
-    func getPlaces() -> Observable<[PlaceEntity]>
-    func addPlaces(from categories: [PlaceEntity]) -> Observable<Bool>
+//    func getPlaces() -> Observable<[PlaceEntity]>
+//    func addPlaces(from categories: [PlaceEntity]) -> Observable<Bool>
+    
+    
+    func getPlaces() -> AnyPublisher<[PlaceEntity], Error>
+    func addPlaces(from places: [PlaceEntity]) -> AnyPublisher<Bool, Error>
 }
 
 final class TourismLocaleDataSource: NSObject {
@@ -30,46 +34,85 @@ final class TourismLocaleDataSource: NSObject {
 }
 
 extension TourismLocaleDataSource: TourismLocaleDataSourceProtocol {
-    func getPlaces() -> Observable<[PlaceEntity]> {
-        return Observable<[PlaceEntity]>.create { observer in
+    func getPlaces() -> AnyPublisher<[PlaceEntity], Error> {
+        return Future<[PlaceEntity], Error> { completion in
             
             guard let realmstorage = self.realm else {
-                return observer.onError(DatabaseError.invalidInstance) as! Disposable }
-            
-            let places : Results<PlaceEntity> = {
+                return  completion(.failure(DatabaseError.invalidInstance))
+            }
+     
+            let categories: Results<PlaceEntity> = {
                 realmstorage.objects(PlaceEntity.self)
-                    .sorted(byKeyPath: "name", ascending: true)
+                .sorted(byKeyPath: "name", ascending: true)
             }()
-            
-            observer.onNext(places.toArray(ofType: PlaceEntity.self))
-            observer.onCompleted()
-            
-            return Disposables.create()
-        }
+            completion(.success(categories.toArray(ofType: PlaceEntity.self)))
+          
+        }.eraseToAnyPublisher()
     }
     
-    
-    func addPlaces(from categories: [PlaceEntity]) -> Observable<Bool> {
-        return Observable<Bool>.create { observer in
+    func addPlaces(from places: [PlaceEntity]) -> AnyPublisher<Bool, Error> {
+        return Future<Bool, Error> { completion in
             
             guard let realmstorage = self.realm else {
-                return observer.onError(DatabaseError.invalidInstance) as! Disposable }
-
+                return  completion(.failure(DatabaseError.invalidInstance))
+                
+            }
             do {
-                try realmstorage.write {
-                    for category in categories {
-                        realmstorage.add(category, update: .all)
-                    }
-                    observer.onNext(true)
-                    observer.onCompleted()
+              try realmstorage.write {
+                for place in places {
+                    realmstorage.add(place, update: .all)
                 }
+                completion(.success(true))
+              }
             } catch {
-                observer.onError(DatabaseError.requestFailed)
+              completion(.failure(DatabaseError.requestFailed))
             }
             
-            return Disposables.create()
-        }
+        }.eraseToAnyPublisher()
     }
+    
+   
+    
+//    func getPlaces() -> Observable<[PlaceEntity]> {
+//        return Observable<[PlaceEntity]>.create { observer in
+//
+//            guard let realmstorage = self.realm else {
+//                return observer.onError(DatabaseError.invalidInstance) as! Disposable }
+//
+//            let places : Results<PlaceEntity> = {
+//                realmstorage.objects(PlaceEntity.self)
+//                    .sorted(byKeyPath: "name", ascending: true)
+//            }()
+//
+//            observer.onNext(places.toArray(ofType: PlaceEntity.self))
+//            observer.onCompleted()
+//
+//            return Disposables.create()
+//        }
+//    }
+//
+//
+//    func addPlaces(from categories: [PlaceEntity]) -> Observable<Bool> {
+//        return Observable<Bool>.create { observer in
+//
+//            guard let realmstorage = self.realm else {
+//                return observer.onError(DatabaseError.invalidInstance) as! Disposable }
+//
+//            do {
+//                try realmstorage.write {
+//                    for category in categories {
+//                        realmstorage.add(category, update: .all)
+//                    }
+//                    observer.onNext(true)
+//                    observer.onCompleted()
+//                }
+//            } catch {
+//                observer.onError(DatabaseError.requestFailed)
+//            }
+//
+//            return Disposables.create()
+//        }
+//    }
         
 }
 

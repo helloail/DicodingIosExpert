@@ -17,6 +17,7 @@ class PlaceEntity: Object {
     @objc dynamic var longitude: Double = 0.0
     @objc dynamic var latitude: Double = 0.0
     @objc dynamic var image: String = ""
+    @objc dynamic var favorite = false
     
     override static func primaryKey() -> String? {
         return "id"
