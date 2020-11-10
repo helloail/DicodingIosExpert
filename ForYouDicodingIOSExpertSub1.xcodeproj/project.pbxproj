@@ -295,7 +295,6 @@
 		142228CB254EA21B00C34F77 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				142228CE254EA25100C34F77 /* Router */,
 				142228CD254EA24100C34F77 /* View */,
 				142228CC254EA23600C34F77 /* Presenter */,
 			);
@@ -317,13 +316,6 @@
 				140317A2254F85960008259E /* HomeRow.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		142228CE254EA25100C34F77 /* Router */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Router;
 			sourceTree = "<group>";
 		};
 		142228D7254EAC2600C34F77 /* Core */ = {
