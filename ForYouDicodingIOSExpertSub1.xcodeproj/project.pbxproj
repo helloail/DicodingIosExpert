@@ -32,6 +32,9 @@
 		142228D0254EA2A300C34F77 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142228CF254EA2A300C34F77 /* MainView.swift */; };
 		142228DB254EACA300C34F77 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142228DA254EACA300C34F77 /* BottomSheetView.swift */; };
 		142228E2254ECC1500C34F77 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142228E1254ECC1500C34F77 /* MainTabView.swift */; };
+		142ADFA5255B01BC00214160 /* FavouritesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ADFA4255B01BC00214160 /* FavouritesInteractor.swift */; };
+		142ADFAC255B066300214160 /* FavouriteRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ADFAB255B066300214160 /* FavouriteRouter.swift */; };
+		142ADFAF255B072400214160 /* FavouritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ADFAE255B072400214160 /* FavouritePresenter.swift */; };
 		142E27462553E54C00B51BA7 /* LoadedStateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142E27452553E54C00B51BA7 /* LoadedStateHelper.swift */; };
 		1473D757254E7E3A00CE3A5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1473D756254E7E3A00CE3A5A /* AppDelegate.swift */; };
 		1473D759254E7E3A00CE3A5A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1473D758254E7E3A00CE3A5A /* SceneDelegate.swift */; };
@@ -74,6 +77,9 @@
 		142228CF254EA2A300C34F77 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		142228DA254EACA300C34F77 /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 		142228E1254ECC1500C34F77 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		142ADFA4255B01BC00214160 /* FavouritesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesInteractor.swift; sourceTree = "<group>"; };
+		142ADFAB255B066300214160 /* FavouriteRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteRouter.swift; sourceTree = "<group>"; };
+		142ADFAE255B072400214160 /* FavouritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritePresenter.swift; sourceTree = "<group>"; };
 		142E27452553E54C00B51BA7 /* LoadedStateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadedStateHelper.swift; sourceTree = "<group>"; };
 		1473D753254E7E3A00CE3A5A /* ForYouDicodingIOSExpertSub1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ForYouDicodingIOSExpertSub1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1473D756254E7E3A00CE3A5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -134,6 +140,8 @@
 		14031797254EF7440008259E /* Favorite */ = {
 			isa = PBXGroup;
 			children = (
+				142ADFAA255B062C00214160 /* Router */,
+				142ADFA9255B062500214160 /* Presenter */,
 				14031798254EF7680008259E /* View */,
 			);
 			path = Favorite;
@@ -142,7 +150,6 @@
 		14031798254EF7680008259E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				141766662552DD8100E66ECC /* HomeRouter.swift */,
 				1403179C254EF7B90008259E /* FavoriteView.swift */,
 			);
 			path = View;
@@ -239,6 +246,7 @@
 			children = (
 				141765DB2551B78200E66ECC /* HomeInteractor.swift */,
 				141766632552DCA200E66ECC /* DetailInteractor.swift */,
+				142ADFA4255B01BC00214160 /* FavouritesInteractor.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -292,6 +300,7 @@
 		142228CB254EA21B00C34F77 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				142ADFA8255B060A00214160 /* Router */,
 				142228CD254EA24100C34F77 /* View */,
 				142228CC254EA23600C34F77 /* Presenter */,
 			);
@@ -346,6 +355,30 @@
 				14A451682556E944001B77B0 /* ButtonStyle.swift */,
 			);
 			path = VIew;
+			sourceTree = "<group>";
+		};
+		142ADFA8255B060A00214160 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				141766662552DD8100E66ECC /* HomeRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		142ADFA9255B062500214160 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				142ADFAE255B072400214160 /* FavouritePresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		142ADFAA255B062C00214160 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				142ADFAB255B066300214160 /* FavouriteRouter.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 		1473D74A254E7E3A00CE3A5A = {
@@ -574,11 +607,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				142ADFA5255B01BC00214160 /* FavouritesInteractor.swift in Sources */,
 				141765DF2551BB2C00E66ECC /* HomePresenter.swift in Sources */,
 				1417665A2552D90000E66ECC /* DetailView.swift in Sources */,
 				140318602550244C0008259E /* API.swift in Sources */,
 				1403179A254EF7820008259E /* HomeView.swift in Sources */,
 				14A451662556E2CE001B77B0 /* LocationManager.swift in Sources */,
+				142ADFAC255B066300214160 /* FavouriteRouter.swift in Sources */,
 				142228E2254ECC1500C34F77 /* MainTabView.swift in Sources */,
 				141766462552A44600E66ECC /* LoaderIndicator.swift in Sources */,
 				1417664A2552ACA500E66ECC /* Injection.swift in Sources */,
@@ -588,6 +623,7 @@
 				1417665F2552DAD800E66ECC /* DetailPresenter.swift in Sources */,
 				140318782550CE880008259E /* PlaceEntity.swift in Sources */,
 				14031789254EDC8A0008259E /* MainRouter.swift in Sources */,
+				142ADFAF255B072400214160 /* FavouritePresenter.swift in Sources */,
 				140317A3254F85960008259E /* HomeRow.swift in Sources */,
 				1403187C2550CF620008259E /* TourismLocaleDataSource.swift in Sources */,
 				14EA0EDC2556D67700B9BB07 /* MapCoordinator.swift in Sources */,

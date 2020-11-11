@@ -33,7 +33,8 @@ final class PlaceMapper {
                 address: result.address,
                 longitude: result.longitude,
                 latitude: result.latitude,
-                image: result.image
+                image: result.image,
+                favorite: result.favorite
                 
             )
         }
@@ -55,4 +56,35 @@ final class PlaceMapper {
             )
         }
     }
+    
+    static func mapDetailMealEntityToDomain( input placeEntity: PlaceEntity  ) -> PlaceModel {
+     
+      return PlaceModel(
+        id: placeEntity.id,
+        name: placeEntity.name,
+        placeDescription: placeEntity.desc,
+        address: placeEntity.address,
+        longitude: placeEntity.longitude,
+        latitude: placeEntity.latitude,
+        image: placeEntity.image,
+        favorite: placeEntity.favorite
+      )
+    }
+    
+    static func mapMealEntitiesToDomains( input placeEntities: [PlaceEntity]) -> [PlaceModel] {
+      return placeEntities.map { result in
+      
+         return PlaceModel(
+           id: result.id,
+           name: result.name,
+           placeDescription: result.desc,
+           address: result.address,
+           longitude: result.longitude,
+           latitude: result.latitude,
+           image: result.image,
+           favorite: result.favorite
+         )
+      }
+    }
+    
 }

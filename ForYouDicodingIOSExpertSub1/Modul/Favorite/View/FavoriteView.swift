@@ -10,24 +10,31 @@ import SwiftUI
 
 struct FavoriteView: View {
     
-    @ObservedObject var presenter: HomePresenter
+    @ObservedObject var presenter: FavouritePresenter
     
     var body: some View {
+        
         ZStack {
+            
+            if presenter.places.count == 0 {
+                Text("fsmknkdf")
+            }
+            
             switch presenter.state {
             
             case .idle, .loading :
+                loadingIndicator
+            case .empty :
                 loadingIndicator
             case .error(let error):
                 Text("Error \(error.localizedDescription)")
             case .loaded:
                 content
+                
             }
-            
         }.onAppear {
-            if self.presenter.places.count == 0 {
-                self.presenter.getPlace()
-            }
+            self.presenter.getPlace()
+            
         }
     }
 }
@@ -43,7 +50,7 @@ extension FavoriteView {
     var content : some View {
         ScrollView(.vertical, showsIndicators: false) {
             ForEach( self.presenter.places, id: \.id ) { place in
-         
+                
                 ZStack {
                     self.presenter.linkBuilder(for: place) {
                         HomeRow(place: place)

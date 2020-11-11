@@ -72,9 +72,11 @@ extension DetailView {
     
     var favoriteButton : some View {
         Button(action: {
-            
+            self.presenter.updateFavoriteMeal()
         }){
-            Image(systemName: "heart.fill")
+             presenter.place.favorite ?
+                Image(systemName: "heart.fill") :
+                Image(systemName: "heart")
             
         }.buttonStyle(CircleBackButtonStyle())
         

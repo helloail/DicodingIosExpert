@@ -11,12 +11,14 @@ import Combine
 
 
 protocol TourismLocaleDataSourceProtocol: class {
-//    func getPlaces() -> Observable<[PlaceEntity]>
-//    func addPlaces(from categories: [PlaceEntity]) -> Observable<Bool>
     
     
     func getPlaces() -> AnyPublisher<[PlaceEntity], Error>
     func addPlaces(from places: [PlaceEntity]) -> AnyPublisher<Bool, Error>
+    
+    
+    func getFavoritePlaces() -> AnyPublisher<[PlaceEntity], Error>
+    func updateFavoritePlace(by idPlace: Int) -> AnyPublisher<PlaceEntity, Error>
 }
 
 final class TourismLocaleDataSource: NSObject {
@@ -34,19 +36,59 @@ final class TourismLocaleDataSource: NSObject {
 }
 
 extension TourismLocaleDataSource: TourismLocaleDataSourceProtocol {
+    
+    func getFavoritePlaces() -> AnyPublisher<[PlaceEntity], Error> {
+        return Future<[PlaceEntity], Error> { completion in
+            
+            guard let realmstorage = self.realm else {
+                return  completion(.failure(DatabaseError.invalidInstance))
+            }
+            
+            let placeEntities = {
+                realmstorage.objects(PlaceEntity.self)
+                    .filter("favorite = \(true)")
+                    .sorted(byKeyPath: "name", ascending: true)
+            }()
+            completion(.success(placeEntities.toArray(ofType: PlaceEntity.self)))
+        }.eraseToAnyPublisher()
+        
+    }
+    
+    func updateFavoritePlace(by idPlace: Int) -> AnyPublisher<PlaceEntity, Error> {
+        return Future<PlaceEntity, Error> { completion in
+            if let realm = self.realm, let placeEntity = {
+                realm.objects(PlaceEntity.self).filter("id = \(idPlace)")
+            }().first {
+                do {
+                    try realm.write {
+                        print("add fav \(placeEntity.favorite)")
+                        print("add !fav \(!placeEntity.favorite)")
+                        placeEntity.setValue(!placeEntity.favorite, forKey: "favorite")
+                        
+                    }
+                    completion(.success(placeEntity))
+                } catch {
+                    completion(.failure(DatabaseError.requestFailed))
+                }
+            } else {
+                completion(.failure(DatabaseError.invalidInstance))
+            }
+        }.eraseToAnyPublisher()
+    }
+    
     func getPlaces() -> AnyPublisher<[PlaceEntity], Error> {
         return Future<[PlaceEntity], Error> { completion in
             
             guard let realmstorage = self.realm else {
                 return  completion(.failure(DatabaseError.invalidInstance))
             }
-     
+            
             let categories: Results<PlaceEntity> = {
                 realmstorage.objects(PlaceEntity.self)
-                .sorted(byKeyPath: "name", ascending: true)
+                    .sorted(byKeyPath: "name", ascending: true)
             }()
             completion(.success(categories.toArray(ofType: PlaceEntity.self)))
-          
+            
         }.eraseToAnyPublisher()
     }
     
@@ -58,62 +100,19 @@ extension TourismLocaleDataSource: TourismLocaleDataSourceProtocol {
                 
             }
             do {
-              try realmstorage.write {
-                for place in places {
-                    realmstorage.add(place, update: .all)
+                try realmstorage.write {
+                    for place in places {
+                        realmstorage.add(place, update: .all)
+                    }
+                    completion(.success(true))
                 }
-                completion(.success(true))
-              }
             } catch {
-              completion(.failure(DatabaseError.requestFailed))
+                completion(.failure(DatabaseError.requestFailed))
             }
             
         }.eraseToAnyPublisher()
     }
     
-   
-    
-//    func getPlaces() -> Observable<[PlaceEntity]> {
-//        return Observable<[PlaceEntity]>.create { observer in
-//
-//            guard let realmstorage = self.realm else {
-//                return observer.onError(DatabaseError.invalidInstance) as! Disposable }
-//
-//            let places : Results<PlaceEntity> = {
-//                realmstorage.objects(PlaceEntity.self)
-//                    .sorted(byKeyPath: "name", ascending: true)
-//            }()
-//
-//            observer.onNext(places.toArray(ofType: PlaceEntity.self))
-//            observer.onCompleted()
-//
-//            return Disposables.create()
-//        }
-//    }
-//
-//
-//    func addPlaces(from categories: [PlaceEntity]) -> Observable<Bool> {
-//        return Observable<Bool>.create { observer in
-//
-//            guard let realmstorage = self.realm else {
-//                return observer.onError(DatabaseError.invalidInstance) as! Disposable }
-//
-//            do {
-//                try realmstorage.write {
-//                    for category in categories {
-//                        realmstorage.add(category, update: .all)
-//                    }
-//                    observer.onNext(true)
-//                    observer.onCompleted()
-//                }
-//            } catch {
-//                observer.onError(DatabaseError.requestFailed)
-//            }
-//
-//            return Disposables.create()
-//        }
-//    }
-        
 }
 
 extension Results {

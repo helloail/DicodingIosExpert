@@ -10,8 +10,6 @@ import Combine
 
 protocol HomeUseCase {
 
-//    func getPlaces() -> Observable<[PlaceModel]>
-    
     func getPlaces() -> AnyPublisher<[PlaceModel], Error>
 }
 
@@ -29,10 +27,5 @@ extension HomeInteractor: HomeUseCase {
     func getPlaces() -> AnyPublisher<[PlaceModel], Error> {
         return repository.getPlaces()
     }
-    
-    
-//    func getPlaces() -> Observable<[PlaceModel]> {
-//        return repository.getPlaces()
-//    }
     
 }

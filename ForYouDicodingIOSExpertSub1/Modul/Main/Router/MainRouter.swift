@@ -31,8 +31,8 @@ extension MainRouter {
     
     func makeFavoriteView() -> some View {
         
-        let homeUseCase = Injection.init().provideHome()
-        let presenter = HomePresenter(homeUseCase: homeUseCase)
+        let favouriteUseCase = Injection.init().provideFavourite()
+        let presenter = FavouritePresenter(favouriteUseCase: favouriteUseCase)
         return FavoriteView(presenter: presenter)
     }
     

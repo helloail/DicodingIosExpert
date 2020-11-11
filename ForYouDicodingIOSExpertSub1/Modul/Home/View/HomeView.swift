@@ -25,6 +25,8 @@ struct HomeView: View {
                 VStack {
                     content
                 }
+            case .empty:
+                Text("")
             }
         }.onAppear {
             if self.presenter.places.count == 0 {

@@ -8,8 +8,9 @@
 import Foundation
 
 enum LoadedStateHelper {
-  case idle
-  case loading
-  case error(Error)
-  case loaded
+    case idle
+    case loading
+    case error(Error)
+    case loaded
+    case empty
 }

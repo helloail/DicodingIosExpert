@@ -16,4 +16,5 @@ struct PlaceModel: Equatable, Identifiable {
     let longitude: Double?
     let latitude: Double?
     let image: String?
+    var favorite: Bool = false
 }
