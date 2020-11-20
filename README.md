@@ -7,7 +7,7 @@ this app is  submission to Dicoding IOS Expert and the architechture using MVVM 
 
 - Domain. Contains the Models (entities) and UseCases. The UseCase depends on what we need and might not include all repositories. 
 
-- Data. Contains the Repositories. The Repository is what we need to communicate with ReST API or local persistent data like CoreData or Realm. And The Data layer depends only on the Domain Layer. I was modified the example to match my coding style.
+- Data. Contains the Repositories. The Repository is what we need to communicate with ReST API or local persistent data (Realm). And The Data layer depends only on the Domain Layer. I was modified the example to match my coding style.
 
 
 video documentation 
