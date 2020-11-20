@@ -3,11 +3,19 @@
 this app is  submission to Dicoding IOS Expert and the architechture using MVVM with Clean Architecture. There are 3 main layers, Presentation, Domain, and Data layers.
 
 
+<img src="https://github.com/helloail/DicodingIosExpert/blob/main/ScreenShoot/7.png">
+
+
 - Presentation. Contains the Views and ViewModels. The Presentation layer depends only on the Domain layer.
 
 - Domain. Contains the Models (entities) and UseCases. The UseCase depends on what we need and might not include all repositories. 
 
 - Data. Contains the Repositories. The Repository is what we need to communicate with ReST API or local persistent data (Realm). And The Data layer depends only on the Domain Layer. I was modified the example to match my coding style.
+
+on the data layer i, use architechture like this
+
+<img src="https://github.com/helloail/DicodingIosExpert/blob/main/ScreenShoot/8.png">
+
 
 ScreenShoot Documnetation
 
