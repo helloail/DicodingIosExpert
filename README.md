@@ -3,7 +3,7 @@
 this app is  submission to Dicoding IOS Expert and the architechture using MVVM with Clean Architecture. There are 3 main layers, Presentation, Domain, and Data layers.
 
 
-<img src="https://github.com/helloail/DicodingIosExpert/blob/main/ScreenShoot/7.png">
+<img src="https://github.com/helloail/DicodingIosExpert/blob/main/ScreenShoot/8.png">
 
 
 - Presentation. Contains the Views and ViewModels. The Presentation layer depends only on the Domain layer.
@@ -14,7 +14,7 @@ this app is  submission to Dicoding IOS Expert and the architechture using MVVM 
 
 on the data layer i, use architechture like this
 
-<img src="https://github.com/helloail/DicodingIosExpert/blob/main/ScreenShoot/8.png">
+<img src="https://github.com/helloail/DicodingIosExpert/blob/main/ScreenShoot/7.png">
 
 
 ScreenShoot Documnetation
