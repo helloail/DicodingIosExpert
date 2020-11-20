@@ -7,10 +7,10 @@
 
 import SwiftUI
 import Combine
-
+import MapKit
 
 class DetailPresenter: ObservableObject {
-  
+    
     private let detailUseCase: DetailUseCase
     
     private var cancellables: Set<AnyCancellable> = []
@@ -40,5 +40,5 @@ class DetailPresenter: ObservableObject {
             })
             .store(in: &cancellables)
     }
-
+    
 }

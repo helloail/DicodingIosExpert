@@ -6,13 +6,11 @@
 //
 
 import Foundation
-import RxSwift
 import Combine
 
 protocol TourismRepositoryProtocol {
     
     func getPlaces() -> AnyPublisher<[PlaceModel], Error>
-    
     
     func getFavoritePlaces() -> AnyPublisher<[PlaceModel], Error>
     
@@ -58,7 +56,6 @@ extension TourismRepository: TourismRepositoryProtocol {
                 }
             }.eraseToAnyPublisher()
     }
-    
     
     func getFavoritePlaces() -> AnyPublisher<[PlaceModel], Error> {
         return self.locale.getFavoritePlaces()

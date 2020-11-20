@@ -9,14 +9,11 @@ import Foundation
 import RealmSwift
 import Combine
 
-
 protocol TourismLocaleDataSourceProtocol: class {
-    
     
     func getPlaces() -> AnyPublisher<[PlaceEntity], Error>
     func addPlaces(from places: [PlaceEntity]) -> AnyPublisher<Bool, Error>
-    
-    
+
     func getFavoritePlaces() -> AnyPublisher<[PlaceEntity], Error>
     func updateFavoritePlace(by idPlace: Int) -> AnyPublisher<PlaceEntity, Error>
 }
@@ -61,8 +58,6 @@ extension TourismLocaleDataSource: TourismLocaleDataSourceProtocol {
             }().first {
                 do {
                     try realm.write {
-                        print("add fav \(placeEntity.favorite)")
-                        print("add !fav \(!placeEntity.favorite)")
                         placeEntity.setValue(!placeEntity.favorite, forKey: "favorite")
                         
                     }

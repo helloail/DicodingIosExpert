@@ -31,8 +31,9 @@ struct HomeView: View {
         }.onAppear {
             if self.presenter.places.count == 0 {
                 self.presenter.getPlace()
+                
             }
-        }
+        }.colorScheme(.light)
     }
 }
 
@@ -42,6 +43,8 @@ extension HomeView {
         VStack {
             LoaderIndicator()
             Text("Loading...")
+                .foregroundColor(Color("text"))
+            
         }
     }
     

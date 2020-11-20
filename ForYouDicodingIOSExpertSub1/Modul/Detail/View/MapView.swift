@@ -16,7 +16,7 @@ struct MapView: UIViewRepresentable {
     func makeCoordinator() -> Coordinator {
         Coordinator(self, latitude: latitude, longtitude: longtitude, title: title)
     }
-    
+
     func makeUIView(context: Context) -> MKMapView {
         
         let map = MKMapView()

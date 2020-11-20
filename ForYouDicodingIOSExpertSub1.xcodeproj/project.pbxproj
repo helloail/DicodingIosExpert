@@ -35,6 +35,7 @@
 		142ADFA5255B01BC00214160 /* FavouritesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ADFA4255B01BC00214160 /* FavouritesInteractor.swift */; };
 		142ADFAC255B066300214160 /* FavouriteRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ADFAB255B066300214160 /* FavouriteRouter.swift */; };
 		142ADFAF255B072400214160 /* FavouritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ADFAE255B072400214160 /* FavouritePresenter.swift */; };
+		142ADFCE255C143800214160 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ADFCD255C143800214160 /* AboutView.swift */; };
 		142E27462553E54C00B51BA7 /* LoadedStateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142E27452553E54C00B51BA7 /* LoadedStateHelper.swift */; };
 		1473D757254E7E3A00CE3A5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1473D756254E7E3A00CE3A5A /* AppDelegate.swift */; };
 		1473D759254E7E3A00CE3A5A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1473D758254E7E3A00CE3A5A /* SceneDelegate.swift */; };
@@ -80,6 +81,7 @@
 		142ADFA4255B01BC00214160 /* FavouritesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesInteractor.swift; sourceTree = "<group>"; };
 		142ADFAB255B066300214160 /* FavouriteRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteRouter.swift; sourceTree = "<group>"; };
 		142ADFAE255B072400214160 /* FavouritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritePresenter.swift; sourceTree = "<group>"; };
+		142ADFCD255C143800214160 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		142E27452553E54C00B51BA7 /* LoadedStateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadedStateHelper.swift; sourceTree = "<group>"; };
 		1473D753254E7E3A00CE3A5A /* ForYouDicodingIOSExpertSub1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ForYouDicodingIOSExpertSub1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1473D756254E7E3A00CE3A5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 		142228C5254E9EF800C34F77 /* Modul */ = {
 			isa = PBXGroup;
 			children = (
+				142ADFCB255C13C000214160 /* About */,
 				14031792254EF69D0008259E /* Main */,
 				142228CB254EA21B00C34F77 /* Home */,
 				14031797254EF7440008259E /* Favorite */,
@@ -379,6 +382,22 @@
 				142ADFAB255B066300214160 /* FavouriteRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		142ADFCB255C13C000214160 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				142ADFCC255C13F200214160 /* View */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
+		142ADFCC255C13F200214160 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				142ADFCD255C143800214160 /* AboutView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		1473D74A254E7E3A00CE3A5A = {
@@ -634,6 +653,7 @@
 				1403186E25502D760008259E /* TourismRemoteDataSource.swift in Sources */,
 				142228DB254EACA300C34F77 /* BottomSheetView.swift in Sources */,
 				142228D0254EA2A300C34F77 /* MainView.swift in Sources */,
+				142ADFCE255C143800214160 /* AboutView.swift in Sources */,
 				1473D759254E7E3A00CE3A5A /* SceneDelegate.swift in Sources */,
 				140318732550CC8A0008259E /* CustomError+Ext.swift in Sources */,
 				141766642552DCA200E66ECC /* DetailInteractor.swift in Sources */,

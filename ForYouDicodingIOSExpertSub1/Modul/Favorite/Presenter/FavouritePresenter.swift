@@ -36,11 +36,9 @@ class FavouritePresenter: ObservableObject {
                 }
             }, receiveValue: { result in
                 if result.count == 0 {
-//
                 self.state = .empty
                 }
                 self.places = result
-                    print(self.state)
                 
             })
             .store(in: &cancellables)

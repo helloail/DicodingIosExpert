@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-fileprivate enum Constants {
+private enum Constants {
     static let radius: CGFloat = 16
     static let indicatorHeight: CGFloat = 6
     static let indicatorWidth: CGFloat = 60
@@ -31,7 +31,7 @@ struct BottomSheetView<Content: View>: View {
     
     private var indicator: some View {
         RoundedRectangle(cornerRadius: Constants.radius)
-            .foregroundColor(Color.secondary)
+            .foregroundColor(Color("indicator"))
             .frame(
                 width: Constants.indicatorWidth,
                 height: Constants.indicatorHeight
@@ -40,9 +40,8 @@ struct BottomSheetView<Content: View>: View {
             }
     }
     
-    init(isOpen: Binding<Bool>, maxHeight: CGFloat, minHeight : CGFloat, @ViewBuilder content: () -> Content) {
+    init(isOpen: Binding<Bool>, maxHeight: CGFloat, minHeight: CGFloat, @ViewBuilder content: () -> Content) {
         self.minHeight = minHeight
-//            maxHeight * Constants.minHeightRatio
         self.maxHeight = maxHeight
         self.content = content()
         self._isOpen = isOpen
@@ -57,7 +56,7 @@ struct BottomSheetView<Content: View>: View {
                     
                 }
                 .frame(width: geometry.size.width, height: self.maxHeight, alignment: .top)
-                .background(Color(.secondarySystemBackground))
+                .background(Color("tertiary"))
                 .cornerRadius(Constants.radius)
                 .frame(height: geometry.size.height, alignment: .bottom)
                 .offset(y: max(self.offset + self.translation, 0))
@@ -71,8 +70,7 @@ struct BottomSheetView<Content: View>: View {
                             return
                         }
                         self.isOpen = value.translation.height < 0
-                    }
-                )
+                    })
         }
     }
 }

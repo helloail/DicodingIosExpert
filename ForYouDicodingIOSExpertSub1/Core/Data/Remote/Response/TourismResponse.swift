@@ -15,10 +15,10 @@ struct TourismResponse: Codable {
     let places: [PlaceResponse]
 
     enum CodingKeys: String, CodingKey {
-        case error = "error"
-        case message = "message"
-        case count = "count"
-        case places = "places"
+        case error 
+        case message
+        case count
+        case places
     }
 }
 

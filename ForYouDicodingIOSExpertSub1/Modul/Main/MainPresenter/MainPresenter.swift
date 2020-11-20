@@ -9,7 +9,6 @@ import SwiftUI
 
 class MainPresenter {
     
-    
     private let router = MainRouter()
     
     func navigationBuilder<Content: View>(forIndex index: Int, @ViewBuilder content: () -> Content) -> some View {

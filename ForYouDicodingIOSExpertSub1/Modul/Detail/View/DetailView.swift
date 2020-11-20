@@ -10,22 +10,28 @@ import SDWebImageSwiftUI
 
 struct DetailView: View {
     
+    @State private var imageheight: CGFloat = 0.0
+    @State private var paddinngNavigationTop: CGFloat = 0.0
     @ObservedObject private var locationManager = LocationManager() 
     @ObservedObject var presenter: DetailPresenter
     @State private var bottomSheetShown = false
     @Environment(\.presentationMode) var presentationMode
+   
+
     
     var body: some View {
-        
-        ZStack(alignment: .top) {
             
-            MapView(latitude: self.presenter.place.latitude ?? 0.0, longtitude: self.presenter.place.longitude ?? 0.0, title: self.presenter.place.name ?? "")
-            
-            navigation
-            Spacer()
-            mainBottomSheet
-        }.navigationBarHidden(true)
-        .ignoresSafeArea()
+            ZStack(alignment: .top) {
+                
+                MapView(latitude: self.presenter.place.latitude ?? 0.0,
+                        longtitude: self.presenter.place.longitude ?? 0.0,
+                        title: self.presenter.place.name ?? "")
+                
+                navigation
+                Spacer()
+                mainBottomSheet
+            }.navigationBarHidden(true)
+            .ignoresSafeArea()
     }
 }
 
@@ -37,48 +43,69 @@ extension DetailView {
             Spacer()
             favoriteButton
         }
-        .padding(EdgeInsets(top: 48, leading: 16, bottom: 0, trailing: 16))
+        .padding(EdgeInsets(top: paddinngNavigationTop, leading: 16, bottom: 0, trailing: 16))
     }
     
     var mainBottomSheet: some View {
         GeometryReader { geometry in
+            
             BottomSheetView(
                 isOpen: self.$bottomSheetShown,
                 maxHeight: geometry.size.height * 0.87,
-                minHeight: geometry.size.height * 0.2
+                minHeight: geometry.size.height * 0.31
             ) {
+                
                 content
+                
+            }.onAppear {
+                self.imageheight =  (geometry.size.height * 0.87)/4
+                self.paddinngNavigationTop = (geometry.size.height * 0.87)/20
             }
+            
         }
     }
+    
     var content : some View {
-        VStack {
-            imageDetail
-            titledetail
+        
+        GeometryReader { _ in
+            
+            ScrollView {
+                VStack(alignment: .leading, spacing: 8) {
+                    
+                    titledetail
+                    imageDetail
+                    addressdetail
+                    descdetail
+                    
+                }
+                
+            }
+            .padding(.horizontal, 16)
         }
-        .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
     }
     
     var backButton : some View {
         
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
-        }){
+        }, label: {
             Image(systemName: "chevron.left")
             
-        }.buttonStyle(CircleBackButtonStyle())
+        }).buttonStyle(CircleBackButtonStyle())
         
     }
     
     var favoriteButton : some View {
         Button(action: {
-            self.presenter.updateFavoriteMeal()
-        }){
-             presenter.place.favorite ?
-                Image(systemName: "heart.fill") :
+                self.presenter.updateFavoriteMeal()
+            
+        },
+        label: {
+            presenter.place.favorite ?
+                Image(systemName: "heart.fill"):
                 Image(systemName: "heart")
             
-        }.buttonStyle(CircleBackButtonStyle())
+        }).buttonStyle(CircleBackButtonStyle())
         
     }
     
@@ -89,13 +116,40 @@ extension DetailView {
             .indicator(.activity)
             .transition(.fade(duration: 0.5))
             .aspectRatio(contentMode: .fill)
-            .frame(width: .infinity, height: 200)
+            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,
+                   maxHeight: imageheight )
             .cornerRadius(20)
+        
     }
     
     var titledetail : some View {
+        HStack {
+            Spacer()
+            Text(self.presenter.place.name ?? "")
+                .font(.title2)
+                .bold()
+                .frame( alignment: .center)
+                .foregroundColor(Color("text"))
+            
+            Spacer()
+        }
+        
+    }
+    
+    var addressdetail : some View {
+        
+        Text(self.presenter.place.address ?? "")
+            .font(.caption2)
+            .foregroundColor(Color("text"))
+            .padding(.top, -5)
+        
+    }
+    
+    var descdetail : some View {
         Text(self.presenter.place.placeDescription ?? "")
             .fixedSize(horizontal: false, vertical: true)
+            .foregroundColor(Color("text"))
+            .font(.body)
     }
     
 }

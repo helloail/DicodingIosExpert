@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-//import RxSwift
 import Combine
 
 class HomePresenter: ObservableObject {
@@ -25,6 +24,7 @@ class HomePresenter: ObservableObject {
     
     func getPlace() {
         state = .loading
+        print("loading")
         homeUseCase.getPlaces()
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { completion in
@@ -36,11 +36,10 @@ class HomePresenter: ObservableObject {
                 }
             }, receiveValue: { result in
                 self.places = result
+                
             })
             .store(in: &cancellables)
     }
-
-
 
     func linkBuilder<Content: View>(for place: PlaceModel, @ViewBuilder content: () -> Content) -> some View {
         

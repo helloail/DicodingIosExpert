@@ -7,7 +7,6 @@
 
 import Foundation
 import Alamofire
-import RxSwift
 import Combine
 
 protocol TourismRemoteDataSourceProtocol: class {
@@ -24,7 +23,7 @@ final class TourismRemoteDataSource: NSObject {
 
 }
 
-extension TourismRemoteDataSource : TourismRemoteDataSourceProtocol {
+extension TourismRemoteDataSource: TourismRemoteDataSourceProtocol {
     func getPlaces() -> AnyPublisher<[PlaceResponse], Error> {
         return Future<[PlaceResponse], Error> { completion in
             

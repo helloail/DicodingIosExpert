@@ -10,13 +10,19 @@ import SwiftUI
 
 class MainRouter {
     
+//    @EnvironmentObject var favoritePresenter: FavouritePresenter
+    @EnvironmentObject var homePresenter: HomePresenter
+    
      func createNavigation(index: Int) -> some View {
         
         switch index {
+        
+//        case 0: return AnyView(HomeView(presenter: homePresenter))
         case 0: return AnyView(makeHomeView())
         case 1: return AnyView(makeFavoriteView())
+        case 2: return AnyView(makeAboutView())
         default:
-            return AnyView(makeHomeView())
+            return AnyView(makeFavoriteView())
         }
     }
 }
@@ -27,6 +33,7 @@ extension MainRouter {
         let homeUseCase = Injection.init().provideHome()
         let presenter = HomePresenter(homeUseCase: homeUseCase)
         return HomeView(presenter: presenter)
+//        return HomeView(presenter: homePresenter)
     }
     
     func makeFavoriteView() -> some View {
@@ -34,6 +41,10 @@ extension MainRouter {
         let favouriteUseCase = Injection.init().provideFavourite()
         let presenter = FavouritePresenter(favouriteUseCase: favouriteUseCase)
         return FavoriteView(presenter: presenter)
+//        return FavoriteView(presenter: favoritePresenter)
     }
     
+    func makeAboutView() -> some View {
+        return AboutView()
+    }
 }

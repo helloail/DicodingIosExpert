@@ -17,12 +17,13 @@ struct FavoriteView: View {
         ZStack {
             
             if presenter.places.count == 0 {
-                Text("fsmknkdf")
+                emptyState
             }
             
             switch presenter.state {
             
             case .idle, .loading :
+                
                 loadingIndicator
             case .empty :
                 loadingIndicator
@@ -40,9 +41,29 @@ struct FavoriteView: View {
 }
 
 extension FavoriteView {
+    
+    var emptyState: some View {
+        VStack {
+            Spacer()
+            Text("Ikan Hiu Makan Tomat")
+                .foregroundColor(Color("textempty"))
+                .font(Font.headline.bold())
+            
+            Text("Kamu Belum Punya Favorit Nih !")
+                .foregroundColor(Color("textempty"))
+                .font(Font.title2.bold())
+            Spacer()
+            
+            Image("emptystate")
+                .resizable()
+                .frame( maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+        }
+    }
+    
     var loadingIndicator: some View {
         VStack {
             Text("Loading...")
+                .foregroundColor(Color("text"))
             LoaderIndicator()
         }
     }

@@ -8,15 +8,13 @@
 import Foundation
 import SwiftUI
 
-struct MainView : View {
+struct MainView: View {
     
     @State private var bottomSheetShown = true
     @State var selectedIndex  = 0
     
     private let presenter = MainPresenter()
-    
-    private let router = MainRouter()
-    
+
     var body: some View {
       
             ZStack(alignment: .bottom) {
@@ -29,7 +27,6 @@ struct MainView : View {
                 }
                 mainBottomSheet
             }
-         
     }
 }
 
@@ -44,7 +41,7 @@ extension MainView {
         VStack {
             Image("mainbackground")
                 .resizable()
-                .frame(width: .infinity, height: .infinity)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding(.top, 20)
                 .background(Color("cyanbackground"))
         }.ignoresSafeArea()
@@ -57,8 +54,9 @@ extension MainView {
                 maxHeight: geometry.size.height * 0.87,
                 minHeight: geometry.size.height * 0.37
             ) {
+                
                 self.presenter.navigationBuilder(forIndex: self.selectedIndex) {
-                    
+
                 }
             }
         }.edgesIgnoringSafeArea(.all)

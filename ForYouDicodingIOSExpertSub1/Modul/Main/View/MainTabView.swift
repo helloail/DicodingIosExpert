@@ -11,27 +11,27 @@ import SwiftUI
 struct MainTabView: View {
     
     @Binding var selectedIndex: Int
-    var titles = ["Home", "Favorites"]
-    var imagetitles = ["house.fill", "heart.fill"]
-    @State var frames = Array<CGRect>(repeating: .zero, count: 2)
+    var titles = ["Home", "Favorites", "Profile"]
+    var imagetitles = ["house.fill", "heart.fill", "person.circle.fill"]
+    @State var frames = Array<CGRect>(repeating: .zero, count: 3)
     
     var body: some View {
-        VStack {
-            ZStack {
-                HStack(spacing: UIScreen.main.bounds.width / 4) {
-                    tabbutton
+            VStack {
+                ZStack {
+                    HStack(spacing: UIScreen.main.bounds.width /  10) {
+                        tabbutton
+                    }
+                    .background(
+                        Capsule()
+                            .fill(Color("cyanactive"))
+                            .frame(width: self.frames[self.selectedIndex].width,
+                                   height: self.frames[self.selectedIndex].height,
+                                   alignment: .topLeading)
+                            .offset(x: self.frames[self.selectedIndex].minX - self.frames[0].minX), alignment: .leading
+                    )
                 }
-                .background(
-                    Capsule()
-                        .fill(Color("cyanactive"))
-                        .frame(width: self.frames[self.selectedIndex].width,
-                               height: self.frames[self.selectedIndex].height,
-                               alignment: .topLeading)
-                        .offset(x: self.frames[self.selectedIndex].minX - self.frames[0].minX), alignment: .leading
-                )
-            }
-            .animation(.default)
-            Spacer()
+                .animation(.default)
+                Spacer()
         }
     }
     
@@ -45,9 +45,7 @@ extension MainTabView {
         ForEach(self.titles.indices, id: \.self) { index in
             Button(action: { self.selectedIndex = index }) {
                 HStack(spacing: 8) {
-                    
-//                    Text("\(self.frames[self.selectedIndex].width)")
-                    
+        
                     Image(systemName: self.imagetitles[index])
                         .foregroundColor(Color("texttab"))
                     
