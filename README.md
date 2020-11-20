@@ -1,3 +1,3 @@
 # DicodingIosExpert
 
-[![Watch the video](https://github.com/helloail/DicodingIOSFundamental/blob/foldering/Screenshoot/dicodingexpert.mp4)]
+[![Watch the video](https://github.com/helloail/DicodingIosExpert/blob/main/ScreenShoot/dicodingexpert.mp4)
