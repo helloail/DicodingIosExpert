@@ -12,7 +12,7 @@ this app is  submission to Dicoding IOS Expert and the architechture using MVVM 
 
 - Data. Contains the Repositories. The Repository is what we need to communicate with ReST API or local persistent data (Realm). And The Data layer depends only on the Domain Layer. I was modified the example to match my coding style.
 
-on the data layer i, use architechture like this
+on the data layer i use architechture like this
 
 <img src="https://github.com/helloail/DicodingIosExpert/blob/main/ScreenShoot/7.png">
 
