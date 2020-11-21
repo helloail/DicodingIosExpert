@@ -1,6 +1,6 @@
 # DicodingIosExpert
 
-this app is  submission to Dicoding IOS Expert and the architechture using MVVM with Clean Architecture. There are 3 main layers, Presentation, Domain, and Data layers.
+this app is  submission to Dicoding IOS Expert use SwiftUI, Alamaofire, Combine and the architechture using MVVM with Clean Architecture. There are 3 main layers, Presentation, Domain, and Data layers.
 
 
 <img src="https://github.com/helloail/DicodingIosExpert/blob/main/ScreenShoot/8.png">
