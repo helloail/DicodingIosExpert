@@ -60,6 +60,7 @@ extension MainTabView {
             .background(
                 GeometryReader { geo in
                     Color.clear.onAppear { self.setFrame(index: index, frame: geo.frame(in: .global)) }
+                   
                 }
             )
         }

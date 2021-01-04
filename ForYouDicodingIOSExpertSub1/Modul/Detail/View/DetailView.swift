@@ -17,8 +17,6 @@ struct DetailView: View {
     @State private var bottomSheetShown = false
     @Environment(\.presentationMode) var presentationMode
    
-
-    
     var body: some View {
             
             ZStack(alignment: .top) {
@@ -52,7 +50,7 @@ extension DetailView {
             BottomSheetView(
                 isOpen: self.$bottomSheetShown,
                 maxHeight: geometry.size.height * 0.87,
-                minHeight: geometry.size.height * 0.31
+                minHeight: geometry.size.height * 0.41
             ) {
                 
                 content
@@ -117,7 +115,7 @@ extension DetailView {
             .transition(.fade(duration: 0.5))
             .aspectRatio(contentMode: .fill)
             .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,
-                   maxHeight: imageheight )
+                   maxHeight: imageheight)
             .cornerRadius(20)
         
     }

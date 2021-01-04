@@ -14,9 +14,10 @@ struct MainView: View {
     @State var selectedIndex  = 0
     
     private let presenter = MainPresenter()
-
+    
     var body: some View {
-      
+        
+        NavigationView {
             ZStack(alignment: .bottom) {
                 
                 imagebackgroundMain
@@ -27,6 +28,7 @@ struct MainView: View {
                 }
                 mainBottomSheet
             }
+        }
     }
 }
 
@@ -56,7 +58,7 @@ extension MainView {
             ) {
                 
                 self.presenter.navigationBuilder(forIndex: self.selectedIndex) {
-
+                    
                 }
             }
         }.edgesIgnoringSafeArea(.all)

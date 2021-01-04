@@ -31,7 +31,7 @@ struct BottomSheetView<Content: View>: View {
     
     private var indicator: some View {
         RoundedRectangle(cornerRadius: Constants.radius)
-            .foregroundColor(Color("indicator"))
+            .foregroundColor(Color("Indicator"))
             .frame(
                 width: Constants.indicatorWidth,
                 height: Constants.indicatorHeight

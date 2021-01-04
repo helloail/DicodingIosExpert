@@ -8,12 +8,29 @@
 import SwiftUI
 
 struct ContentView: View {
-    private let router = MainRouter()
+    
+    @EnvironmentObject var homePresenter: HomePresenter
+    @EnvironmentObject var favoritePresenter: FavouritePresenter
     
     var body: some View {
-        NavigationView {
-            MainView()
+        TabView {
+            NavigationView {
+                HomeView(presenter: homePresenter)
+            }.tabItem {
+                TabItem(imageName: "house", title: "Home")
+            }
             
+            NavigationView {
+                FavoriteView(presenter: favoritePresenter)
+            }.tabItem {
+                TabItem(imageName: "heart", title: "Fsvourites")
+            }
+            
+            NavigationView {
+                AboutView()
+            }.tabItem {
+                TabItem(imageName: "heart", title: "About")
+            }
         }
     }
 }

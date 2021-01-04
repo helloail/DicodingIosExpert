@@ -32,7 +32,7 @@ extension AboutView {
             .resizable()
             
             .aspectRatio( contentMode: .fill)
-            .frame(width: 200 , height: 200)
+            .frame(width: 200, height: 200)
             .clipShape(Circle())
     }
     
