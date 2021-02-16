@@ -34,4 +34,4 @@ Ayolah kawan.. Kalian sudah bayar mahal untuk ikut kelas ini, kalian harus dapat
 
 Semangat kawan.. Perjalanan masih panjang. Lakukan yang terbaik yang kalian bisa. Silahkan tanya saya jika ada yang kurang dimengerti. Kalau saya bisa bantu, pasti saya dampingi.
 
-Mari kita maju bersama-sama..
+Mari kita maju bersama-sama...
