@@ -6,11 +6,19 @@
 //
 
 import SwiftUI
+import Core
+import Tourism
 
 struct ContentView: View {
     
-    @EnvironmentObject var homePresenter: HomePresenter
-    @EnvironmentObject var favoritePresenter: FavouritePresenter
+    @EnvironmentObject var homePresenter: GetListPresenter<
+        Any, TourismModel, Interactor
+        <Any, [TourismModel], GetTourismRepository<GetTourismLocaleDataSource,
+                                                   GetTourismRemoteDataSource, TourismTransformer>>>
+    
+    @EnvironmentObject var favoritePresenter: GetListPresenter<
+        String, TourismModel, Interactor
+        <String, [TourismModel], GetFavoriteTourismRepository<GetFavoriteTourismLocaleDataSource, TourismTransformer>>>
     
     var body: some View {
         TabView {
@@ -29,7 +37,7 @@ struct ContentView: View {
             NavigationView {
                 AboutView()
             }.tabItem {
-                TabItem(imageName: "heart", title: "About")
+                TabItem(imageName: "person", title: "About")
             }
         }
     }

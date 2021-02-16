@@ -13,25 +13,25 @@ struct MainTabView: View {
     @Binding var selectedIndex: Int
     var titles = ["Home", "Favorites", "Profile"]
     var imagetitles = ["house.fill", "heart.fill", "person.circle.fill"]
-    @State var frames = Array<CGRect>(repeating: .zero, count: 3)
+    @State var frames = [CGRect](repeating: .zero, count: 3)
     
     var body: some View {
-            VStack {
-                ZStack {
-                    HStack(spacing: UIScreen.main.bounds.width /  10) {
-                        tabbutton
-                    }
-                    .background(
-                        Capsule()
-                            .fill(Color("cyanactive"))
-                            .frame(width: self.frames[self.selectedIndex].width,
-                                   height: self.frames[self.selectedIndex].height,
-                                   alignment: .topLeading)
-                            .offset(x: self.frames[self.selectedIndex].minX - self.frames[0].minX), alignment: .leading
-                    )
+        VStack {
+            ZStack {
+                HStack(spacing: UIScreen.main.bounds.width /  10) {
+                    tabbutton
                 }
-                .animation(.default)
-                Spacer()
+                .background(
+                    Capsule()
+                        .fill(Color("cyanactive"))
+                        .frame(width: self.frames[self.selectedIndex].width,
+                               height: self.frames[self.selectedIndex].height,
+                               alignment: .topLeading)
+                        .offset(x: self.frames[self.selectedIndex].minX - self.frames[0].minX), alignment: .leading
+                )
+            }
+            .animation(.default)
+            Spacer()
         }
     }
     
@@ -43,9 +43,12 @@ struct MainTabView: View {
 extension MainTabView {
     var tabbutton  : some View {
         ForEach(self.titles.indices, id: \.self) { index in
-            Button(action: { self.selectedIndex = index }) {
+            
+            Button {
+                self.selectedIndex = index
+            } label: {
                 HStack(spacing: 8) {
-        
+                    
                     Image(systemName: self.imagetitles[index])
                         .foregroundColor(Color("texttab"))
                     
@@ -54,13 +57,13 @@ extension MainTabView {
                         .fontWeight(.bold)
                         .foregroundColor(Color("texttab"))
                 }
-                
-            }.buttonStyle(PlainButtonStyle())
+            }
+            .buttonStyle(PlainButtonStyle())
             .padding(8)
             .background(
                 GeometryReader { geo in
                     Color.clear.onAppear { self.setFrame(index: index, frame: geo.frame(in: .global)) }
-                   
+                    
                 }
             )
         }

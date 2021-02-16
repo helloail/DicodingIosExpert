@@ -6,31 +6,29 @@
 //
 
 import SwiftUI
+import Tourism
+import Core
 
 struct HomeView: View {
-    
-    @ObservedObject var presenter: HomePresenter
-    
-    private let router = HomeRouter()
+    @ObservedObject var presenter: GetListPresenter<
+        Any, TourismModel, Interactor<
+            Any, [TourismModel], GetTourismRepository<
+                GetTourismLocaleDataSource, GetTourismRemoteDataSource, TourismTransformer>>>
     
     var body: some View {
         ZStack {
-            
-            switch presenter.state {
-            case .idle, .loading :
+            if presenter.isLoading {
                 loadingIndicator
-            case .error(let error):
-                Text("Error \(error.localizedDescription)")
-            case .loaded:
-                VStack {
-                    content
-                }
-            case .empty:
-                Text("")
+            } else if presenter.isError {
+                errorIndicator
+            } else if presenter.list.isEmpty {
+                emptyCategories
+            } else {
+                content
             }
         }.onAppear {
-            if self.presenter.places.count == 0 {
-                self.presenter.getPlace()
+            if self.presenter.list.count == 0 {
+                self.presenter.getList(request: nil)
                 
             }
         }.colorScheme(.light)
@@ -38,6 +36,20 @@ struct HomeView: View {
 }
 
 extension HomeView {
+    
+    var errorIndicator: some View {
+        CustomEmptyView(
+            image: "assetSearchNotFound",
+            title: presenter.errorMessage
+        ).offset(y: 80)
+    }
+    
+    var emptyCategories: some View {
+        CustomEmptyView(
+            image: "assetNoFavorite",
+            title: "The meal category is empty"
+        ).offset(y: 80)
+    }
     
     var loadingIndicator: some View {
         VStack {
@@ -50,17 +62,26 @@ extension HomeView {
     
     var content : some View {
         ScrollView(.vertical, showsIndicators: false) {
-            ForEach( self.presenter.places, id: \.name ) { place in
-        
+            ForEach( self.presenter.list, id: \.name ) { place in
+       
                 ZStack {
-                    self.presenter.linkBuilder(for: place) {
+                    linkBuilder(for: place) {
                         HomeRow(place: place)
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    
-                }.padding(EdgeInsets(top: 8, leading: 24, bottom: 8, trailing: 8))
+                    }.buttonStyle(PlainButtonStyle())
+                }.padding(8)
                 
-            }
+            }.padding(EdgeInsets(top: 8, leading: 24, bottom: 8, trailing: 8))
+            
         }
+    }
+    
+    func linkBuilder<Content: View>(
+        for tourism: TourismModel,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        
+        NavigationLink(
+            destination: DetailRouter().makeDetailView(for: tourism)
+        ) { content() }
     }
 }

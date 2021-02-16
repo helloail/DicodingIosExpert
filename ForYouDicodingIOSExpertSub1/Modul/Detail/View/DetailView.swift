@@ -7,13 +7,21 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import Core
+import Tourism
 
 struct DetailView: View {
     
+    @ObservedObject var presenter: DetailModulPresenter<Int, TourismModel,
+     Interactor<Int, TourismModel,
+                GetPartTourismRepository<GetFavoriteTourismLocaleDataSource, TourismTransformer>>,
+     Interactor<Int, TourismModel,
+                UpdateFavoriteTourismRepository<GetFavoriteTourismLocaleDataSource, TourismTransformer>>>
+    var tourism: TourismModel
+    
     @State private var imageheight: CGFloat = 0.0
     @State private var paddinngNavigationTop: CGFloat = 0.0
-    @ObservedObject private var locationManager = LocationManager() 
-    @ObservedObject var presenter: DetailPresenter
+    @ObservedObject private var locationManager = LocationManager()
     @State private var bottomSheetShown = false
     @Environment(\.presentationMode) var presentationMode
    
@@ -21,15 +29,21 @@ struct DetailView: View {
             
             ZStack(alignment: .top) {
                 
-                MapView(latitude: self.presenter.place.latitude ?? 0.0,
-                        longtitude: self.presenter.place.longitude ?? 0.0,
-                        title: self.presenter.place.name ?? "")
+                MapView(latitude: self.presenter.item?.latitude ?? 0.0,
+                        longtitude: self.presenter.item?.longitude ?? 0.0,
+                        title: self.presenter.item?.name ?? "")
                 
                 navigation
                 Spacer()
                 mainBottomSheet
             }.navigationBarHidden(true)
             .ignoresSafeArea()
+            .onAppear {
+                if self.presenter.item == nil {
+                    self.presenter.getTourism(request: tourism.id)
+                }
+
+            }
     }
 }
 
@@ -95,11 +109,11 @@ extension DetailView {
     
     var favoriteButton : some View {
         Button(action: {
-                self.presenter.updateFavoriteMeal()
+            self.presenter.updateFavoriteTourism(request: tourism.id)
             
         },
         label: {
-            presenter.place.favorite ?
+            presenter.item?.favorite == true ?
                 Image(systemName: "heart.fill"):
                 Image(systemName: "heart")
             
@@ -109,12 +123,12 @@ extension DetailView {
     
     var imageDetail: some View {
         
-        WebImage(url: URL(string: self.presenter.place.image ?? ""))
+        WebImage(url: URL(string: self.presenter.item?.image ?? ""))
             .resizable()
             .indicator(.activity)
             .transition(.fade(duration: 0.5))
             .aspectRatio(contentMode: .fill)
-            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,
+            .frame(maxWidth: .infinity,
                    maxHeight: imageheight)
             .cornerRadius(20)
         
@@ -123,7 +137,7 @@ extension DetailView {
     var titledetail : some View {
         HStack {
             Spacer()
-            Text(self.presenter.place.name ?? "")
+            Text(self.presenter.item?.name ?? "")
                 .font(.title2)
                 .bold()
                 .frame( alignment: .center)
@@ -136,7 +150,7 @@ extension DetailView {
     
     var addressdetail : some View {
         
-        Text(self.presenter.place.address ?? "")
+        Text(self.presenter.item?.address ?? "")
             .font(.caption2)
             .foregroundColor(Color("text"))
             .padding(.top, -5)
@@ -144,7 +158,7 @@ extension DetailView {
     }
     
     var descdetail : some View {
-        Text(self.presenter.place.placeDescription ?? "")
+        Text(self.presenter.item?.placeDescription ?? "")
             .fixedSize(horizontal: false, vertical: true)
             .foregroundColor(Color("text"))
             .font(.body)

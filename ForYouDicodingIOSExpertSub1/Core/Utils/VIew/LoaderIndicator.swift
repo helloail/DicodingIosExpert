@@ -2,7 +2,7 @@
 //  LoaderIndicator.swift
 //  ForYouDicodingIOSExpertSub1
 //
-//  Created by Moh Zinnur Atthufail Addausi on 04/11/20.
+//  Created by Moh Zinnur Atthufail Addausi on 15/02/21.
 //
 
 import SwiftUI

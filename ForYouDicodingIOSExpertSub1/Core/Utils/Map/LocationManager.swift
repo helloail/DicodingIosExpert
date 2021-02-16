@@ -2,15 +2,16 @@
 //  LocationManager.swift
 //  ForYouDicodingIOSExpertSub1
 //
-//  Created by Moh Zinnur Atthufail Addausi on 07/11/20.
+//  Created by Moh Zinnur Atthufail Addausi on 15/02/21.
 //
+
 import Foundation
 import MapKit
 
 class LocationManager: NSObject, ObservableObject {
     
     private let locationManager = CLLocationManager()
-    @Published var location: CLLocation? 
+    @Published var location: CLLocation?
     
     override init() {
         

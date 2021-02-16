@@ -7,40 +7,43 @@
 
 import Foundation
 import SwiftUI
+import Tourism
+import Core
 
 struct FavoriteView: View {
-    
-    @ObservedObject var presenter: FavouritePresenter
+    @ObservedObject var presenter: GetListPresenter<
+        String, TourismModel, Interactor<
+            String, [TourismModel], GetFavoriteTourismRepository<
+                GetFavoriteTourismLocaleDataSource, TourismTransformer>>>
     
     var body: some View {
         
         ZStack {
             
-            if presenter.places.count == 0 {
+            if presenter.isLoading {
+                loadingIndicator
+            } else if presenter.isError {
+                errorIndicator
+            } else if presenter.list.isEmpty {
                 emptyState
-            }
-            
-            switch presenter.state {
-            
-            case .idle, .loading :
-                
-                loadingIndicator
-            case .empty :
-                loadingIndicator
-            case .error(let error):
-                Text("Error \(error.localizedDescription)")
-            case .loaded:
+            } else {
                 content
-                
             }
         }.onAppear {
-            self.presenter.getPlace()
+            self.presenter.getList(request: nil)
             
         }
     }
 }
 
 extension FavoriteView {
+    
+    var errorIndicator: some View {
+        CustomEmptyView(
+            image: "assetSearchNotFound",
+            title: presenter.errorMessage
+        ).offset(y: 80)
+    }
     
     var emptyState: some View {
         VStack {
@@ -70,10 +73,10 @@ extension FavoriteView {
     
     var content : some View {
         ScrollView(.vertical, showsIndicators: false) {
-            ForEach( self.presenter.places, id: \.id ) { place in
+            ForEach( self.presenter.list, id: \.id ) { place in
                 
                 ZStack {
-                    self.presenter.linkBuilder(for: place) {
+                    linkBuilder(for: place) {
                         HomeRow(place: place)
                     }
                     .buttonStyle(PlainButtonStyle())
@@ -83,5 +86,14 @@ extension FavoriteView {
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
             .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 0))
         }
+    }
+    func linkBuilder<Content: View>(
+        for tourism: TourismModel,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        
+        NavigationLink(
+            destination: DetailRouter().makeDetailView(for: tourism)
+        ) { content() }
     }
 }

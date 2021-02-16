@@ -7,10 +7,11 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import Tourism
 
 struct HomeRow: View {
     
-    var place: PlaceModel
+    var place: TourismModel
     
     var body: some View {
         HStack(spacing: 16) {
@@ -18,7 +19,7 @@ struct HomeRow: View {
             content
             spacer
             
-        }.frame(height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, alignment: .leading)
+        }.frame(height: 100, alignment: .leading)
         .padding(.top, 8)
     }
 }
